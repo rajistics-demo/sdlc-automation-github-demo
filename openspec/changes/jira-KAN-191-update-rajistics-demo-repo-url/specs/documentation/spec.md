@@ -41,4 +41,4 @@ Test fixtures that represent actual historical GitHub webhook events remain unch
 
 - Given test fixtures containing GitHub event payloads from before the transfer
 - When reviewing test data
-- Then the fixtures accurately reflect the `rajshah4` organization as it existed at the time of the original events
+- Then the fixtures accurately reflect the `rajshah4` account as it existed at the time of the original events

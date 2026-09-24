@@ -2,7 +2,7 @@
 
 ## Why
 
-The SDLC Automation Demo repository has been transferred from the `rajshah4` GitHub organization to the `rajistics-demo` organization. The customer-facing setup guide and related documentation must use the new repository URL so both demo accounts follow the same instructions and automation configurations reference the correct repository location.
+The SDLC Automation Demo repository has been transferred from the personal `rajshah4` GitHub account to the `rajistics-demo` organization. The customer-facing setup guide and related documentation must use the new repository URL so both demo accounts follow the same instructions and automation configurations reference the correct repository location.
 
 ## Source
 
