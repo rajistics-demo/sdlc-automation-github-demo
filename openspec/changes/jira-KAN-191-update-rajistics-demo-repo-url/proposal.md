@@ -1,0 +1,46 @@
+# Change: Update SDLC Demo Setup Guide for rajistics-demo Organization
+
+## Why
+
+The SDLC Automation Demo repository has been transferred from the `rajshah4` GitHub organization to the `rajistics-demo` organization. The customer-facing setup guide and related documentation must use the new repository URL so both demo accounts follow the same instructions and automation configurations reference the correct repository location.
+
+## Source
+
+- Jira issue: https://rajiv-shah.atlassian.net/browse/KAN-191
+- Trigger: jira:issue_created
+- Automation: Jira Bug to PR - KAN Task to PR
+
+## Assumptions
+
+- GitHub page links (issues, PRs, etc.) redirect automatically after a repository transfer
+- OpenHands event filters and cloned repository settings must use the new owner/repository name
+- The repository is already transferred and accessible at https://github.com/rajistics-demo/sdlc-automation-github-demo
+- No changes to product code, credentials, GitHub permissions, or deployment settings are required
+
+## Non-Goals
+
+- Changing product code or application functionality
+- Modifying credentials or secrets
+- Updating GitHub permissions or branch protection rules
+- Altering deployment settings or infrastructure
+- Changing test fixtures that represent historical event data
+
+## What Changes
+
+- Documentation files updated to reference `rajistics-demo/sdlc-automation-github-demo` instead of `rajshah4/sdlc-automation-github-demo`
+- Automation registration scripts updated with the new default repository URL
+- README and setup guides updated with the correct GitHub organization
+- Agent Canvas and related scripts updated to use the new repository reference
+
+## Impact
+
+- **App behavior**: No changes to application code or runtime behavior
+- **Tests**: Test fixtures representing historical GitHub events remain unchanged as they reflect actual past data
+- **Humans**: Setup instructions now reference the correct repository location; existing automation configurations will need the environment variable `GITHUB_DEMO_REPO_URL` set to the new URL or will use the updated default
+
+## Human Gates
+
+- **Scope approval**: Jira issue KAN-191 defines the scope as documentation-only changes
+- **Review approval**: Required before merge - humans must verify all URL references are correct
+- **Merge approval**: Required - humans approve the final PR
+- **Deployment approval**: Not applicable - documentation changes only

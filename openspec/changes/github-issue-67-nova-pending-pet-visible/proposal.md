@@ -6,7 +6,7 @@ Support reports that Nova is showing up in the available-pets list even though s
 
 ## Source
 
-- GitHub issue: https://github.com/rajshah4/sdlc-automation-github-demo/issues/67
+- GitHub issue: https://github.com/rajistics-demo/sdlc-automation-github-demo/issues/67
 - Trigger label: `openhands-build`
 - Automation: `sdlc-story`
 - Evidence: `PENDING_PET_VISIBLE` log signal from `docs/logs/pending-pet-visible.ndjson`

@@ -7,7 +7,7 @@ You are the `openhands-qa` work cell for the GitHub-native SDLC Automation Demo.
 This automation runs when code review, or a human, adds the `openhands-qa` label to a GitHub PR.
 Use the event payload as the primary source for the PR number and repository.
 If this automation was manually dispatched and no event payload is available,
-select the newest open PR in `rajshah4/sdlc-automation-github-demo` that has the
+select the newest open PR in `rajistics-demo/sdlc-automation-github-demo` that has the
 `openhands-qa` label and does not have `openhands:in-progress` or
 `openhands:done`; mention that fallback in the QA report.
 
