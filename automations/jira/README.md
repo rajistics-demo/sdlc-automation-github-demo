@@ -23,7 +23,7 @@ Use the existing Rajistics webhook source:
 
 - Source: `jira-direct`
 - Event: `jira:issue_created`
-- Filter: `issue.fields.project.key == 'KAN' && issue.fields.issuetype.name == 'Task'`
+- Filter: `KAN` Tasks without the `sidekick-v2`, `dependency-remediation`, or `security-remediation` labels. Those labels belong to separate demo work cells.
 
 Do not include repo names, file paths, log codes, or implementation clues in demo Jira tickets.
 
