@@ -135,7 +135,9 @@ def test_jira_registration_preserves_secret_placeholders(monkeypatch) -> None:
 
     assert payload["trigger"]["filter"] == (
         "issue.fields.project.key == 'KAN' && issue.fields.issuetype.name == 'Task' "
-        "&& !contains(issue.fields.labels, 'sidekick-v2')"
+        "&& !contains(issue.fields.labels, 'sidekick-v2') "
+        "&& !contains(issue.fields.labels, 'dependency-remediation') "
+        "&& !contains(issue.fields.labels, 'security-remediation')"
     )
     assert payload["repos"][0]["url"] == "https://github.com/example/demo"
     assert payload["repos"][0]["ref"] == "demo-ref"
