@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 AUTOMATION_ROOT = REPO_ROOT / "automations" / "jira"
 DEFAULTS = {
     "JIRA_DEMO_PROJECT_KEY": "KAN",
-    "GITHUB_DEMO_REPO_URL": "https://github.com/rajshah4/sdlc-automation-github-demo",
+    "GITHUB_DEMO_REPO_URL": "https://github.com/rajistics-demo/sdlc-automation-github-demo",
     "GITHUB_DEMO_REF": "main",
 }
 

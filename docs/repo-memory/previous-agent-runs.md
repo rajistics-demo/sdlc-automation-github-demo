@@ -5,7 +5,7 @@ This file is curated episodic memory for the live demo. It should contain durabl
 ## Validated Build Run
 
 - Date: 2026-06-23
-- Issue: `rajshah4/sdlc-automation-github-demo#1`
+- Issue: `rajistics-demo/sdlc-automation-github-demo#1`
 - Result: OpenHands opened PR #2 for the max adoption fee filter and posted a completion summary.
 - Reusable lesson: sparse catalog requests should start from `app/petstore_app/catalog.py`, `app/tests/test_pet_catalog.py`, and OpenSpec-style artifacts under `openspec/changes/`.
 

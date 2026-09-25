@@ -1,51 +1,9 @@
-# SDLC Automation Demo: Jira Request To PR
+# Jira request to draft pull request
 
-## What Triggered This
+**Manual test with no event:** Check only the repository, instructions, GitHub access, and Jira integration, then stop. Do not select a Jira issue, even if one is open. Do not post comments or change Jira or GitHub. If probing Jira directly, use its configured authentication method (`JIRA_AUTH_MODE`). Mark the readiness check successful when those checks pass, and say that the event workflow was not exercised.
 
-A new Jira request started this automation. The request may be brief and written
-entirely in business language.
+For a Jira event, follow the cloned repository’s `AGENTS.md` and `sdlc-story` skill. Use the Jira request and its acceptance criteria to make a focused change, validate it, and open a draft pull request for human review. For documentation, check deployment-specific claims against current settings and general rules against provider documentation; identify anything unverified. After opening the pull request, add the `openhands-review` label before finishing so the review can start. Do not add `openhands-qa` here; review owns that handoff. Leave scope decisions, approval, merge, and deployment to people. Do not expose credentials or change branch protection or deployment settings.
 
-## What You Do
+Add a conversation link to the pull request only when the current run provides a verifiable URL or conversation ID. Never guess a link. End every Jira comment and pull request description posted by this run with: `Created by an AI agent (OpenHands) on behalf of Rajiv Shah.`
 
-1. Understand the request, its context, and any acceptance criteria.
-2. Follow the repository's SDLC story skill to turn the request into an
-   OpenSpec-style proposal, design, task list, and test plan.
-3. Implement the smallest safe change and create a draft pull request.
-4. Record assumptions, evidence, and validation results in the pull request.
-5. After the draft pull request is open, add the `openhands-review` label to it
-   so the code-review work cell starts as a separate conversation. Do this label
-   handoff before finishing so the next stage does not depend on conversation
-   shutdown. Do not add `openhands-qa` or `openhands:done` here; those are owned
-   by the review and QA work cells.
-
-## Conversation Link
-
-This automation's OpenHands conversation URL is appended to the end of this
-prompt by the runtime. Include it in the pull-request description so reviewers
-can trace the work back to the agent session that produced it. Add it as a
-concise line near the end of the PR body:
-
-`OpenHands conversation: <url>`
-
-Copy the URL exactly as provided — do not write a shell variable or
-placeholder. On self-hosted deployments the URL is injected by a custom
-automation script; see `docs/automation-conversation-link-gap.md` for the
-background and the workaround.
-
-## What You Post Back To Jira
-
-- A concise status update and link to the draft pull request.
-- The validation performed and any assumptions that need confirmation.
-- A clear question when a product or engineering decision requires human input.
-
-## Human Control
-
-People remain responsible for scope, pull-request review, merge, deployment, and
-any risky follow-up. Automated QA validates the change; it never approves or
-merges it.
-
-## Operating Boundaries
-
-Use the configured Jira and GitHub integrations and follow the repository-local
-skills. Keep the workflow event-driven, protect credentials, and do not change
-production resources, deployment settings, or branch protection.
+Finish with a structured status and a short outcome summary. For event runs, mark success only after the draft pull request and required handoff are complete; otherwise explain what remains blocked or failed.
