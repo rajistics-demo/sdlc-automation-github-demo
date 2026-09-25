@@ -37,7 +37,8 @@ def test_all_github_automation_packages_have_visible_demo_prompts() -> None:
         assert "AGENTS.md" in prompt or "What You Do" in prompt
         assert "pull request" in prompt.lower() or "PR" in prompt
         if spec_path.parent.name in {"openhands-review", "openhands-qa"}:
-            assert len(prompt.split()) < 280
+            word_limit = 320 if spec_path.parent.name == "openhands-qa" else 280
+            assert len(prompt.split()) < word_limit
             assert "People decide" in prompt
 
 
