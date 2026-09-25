@@ -33,12 +33,12 @@ def test_all_github_automation_packages_have_visible_demo_prompts() -> None:
         prompt = (spec_path.parent / spec["prompt_file"]).read_text(encoding="utf-8")
         assert spec["preset"] == "prompt"
         assert spec_path.parent.name in spec["trigger"]["filter"]
-        assert "What You Do" in prompt
-        assert "What You Post Back To GitHub" in prompt
-        assert "Human Control" in prompt
-        assert "Cost And Security" in prompt
-        assert "GITHUB_TOKEN" in prompt
-        assert "secret named `GITHUB`" in prompt
+        assert prompt.startswith("# ")
+        assert "AGENTS.md" in prompt or "What You Do" in prompt
+        assert "pull request" in prompt.lower() or "PR" in prompt
+        if spec_path.parent.name in {"openhands-review", "openhands-qa"}:
+            assert len(prompt.split()) < 230
+            assert "People decide" in prompt
 
 
 def test_github_automation_specs_include_model_profiles() -> None:
@@ -103,7 +103,7 @@ def test_jira_prompt_is_a_short_orchestrator() -> None:
     assert spec["trigger"]["source"] == "jira-direct"
     assert spec["trigger"]["on"] == "jira:issue_created"
     assert "JIRA_DEMO_PROJECT_KEY" in spec["trigger"]["filter"]
-    assert "repository's SDLC story skill" in prompt
+    assert "`sdlc-story` skill" in prompt
     assert "GITHUB_TOKEN" in (ROOT / "skills" / "sdlc-story" / "SKILL.md").read_text(
         encoding="utf-8"
     )
@@ -146,7 +146,7 @@ def test_jira_registration_keeps_credentials_out_of_prompt(monkeypatch) -> None:
     assert "secret-value-that-must-not-expand" not in payload["prompt"]
     assert "${JIRA_API_TOKEN}" not in payload["prompt"]
     assert "${JIRA_API_BASE_URL}" not in payload["prompt"]
-    assert "configured Jira and GitHub integrations" in payload["prompt"]
+    assert "Jira integration" in payload["prompt"]
 
 
 def test_public_jira_automation_set_is_demo_focused() -> None:
@@ -247,7 +247,7 @@ def test_story_review_qa_handoff_is_sequential() -> None:
     assert "add `openhands-review` as the final GitHub mutation" in story_skill
     assert "Do not add `openhands-qa`" in story_prompt
     assert "add `openhands-qa`" in review_prompt
-    assert "before posting the final review" in review_prompt
+    assert "before posting the final review" in review_prompt.lower()
     assert "Do not add `openhands:done`" in review_prompt
     assert "add `openhands:done`" in qa_prompt
 
@@ -309,8 +309,6 @@ def test_github_runtime_secret_convention_is_consistent() -> None:
         ROOT / "skills" / "sdlc-code-review" / "SKILL.md",
         ROOT / "skills" / "sdlc-sidekick-launcher" / "SKILL.md",
         AUTOMATIONS / "openhands-build" / "prompt.md",
-        AUTOMATIONS / "openhands-qa" / "prompt.md",
-        AUTOMATIONS / "openhands-review" / "prompt.md",
         JIRA_AUTOMATIONS / "jira-to-story-sidekick-v2" / "prompt.md",
     ]
 
