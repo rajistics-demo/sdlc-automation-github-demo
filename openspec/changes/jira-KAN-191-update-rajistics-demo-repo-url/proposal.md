@@ -31,16 +31,18 @@ The SDLC Automation Demo repository has been transferred from the personal `rajs
 - Automation registration scripts updated with the new default repository URL
 - README and setup guides updated with the correct GitHub organization
 - Agent Canvas and related scripts updated to use the new repository reference
+- Customer-facing Jira, review, and QA prompts shortened at the user's request while preserving the event handoffs and human gates
+- Tests updated for the current repository defaults, trigger filter, and concise prompt contracts
 
 ## Impact
 
-- **App behavior**: No changes to application code or runtime behavior
-- **Tests**: Test fixtures representing historical GitHub events remain unchanged as they reflect actual past data
+- **App behavior**: No changes to application code. Automation prompt instructions and the Jira trigger filter change; live configurations were updated and tested separately.
+- **Tests**: Assertions change to match the current repository defaults and concise prompts. Historical GitHub event fixtures remain unchanged.
 - **Humans**: Setup instructions now reference the correct repository location; existing automation configurations will need the environment variable `GITHUB_DEMO_REPO_URL` set to the new URL or will use the updated default
 
 ## Human Gates
 
-- **Scope approval**: Jira issue KAN-191 defines the scope as documentation-only changes
-- **Review approval**: Required before merge - humans must verify all URL references are correct
+- **Scope approval**: Jira issue KAN-191 covers the repository move; the user separately requested customer-readable prompts and live verification
+- **Review approval**: Required before merge - humans must verify the repository references and prompt behavior
 - **Merge approval**: Required - humans approve the final PR
-- **Deployment approval**: Not applicable - documentation changes only
+- **Deployment approval**: Required if applying repository automation definitions to a new environment; this PR does not deploy the application

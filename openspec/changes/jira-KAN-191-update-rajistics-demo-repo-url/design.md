@@ -16,7 +16,8 @@ The repository contains:
 - **Update default values in automation registration scripts** so new installations use the correct repository URL
 - **Preserve test fixtures unchanged** because they represent historical data and should accurately reflect the organization name at the time of the original events
 - **Add explanation to setup documentation** clarifying what redirects after a transfer and what requires explicit updates
-- **Scope limited to documentation and setup helpers** - no changes to product code, tests, credentials, or deployment settings
+- **Make the active Jira, review, and QA prompts readable to customers** while retaining event routing, evidence checks, label handoffs, and human approval boundaries. This follows the separate user request to improve automation prompts and check their live results.
+- **Update prompt and repository-default tests** to cover the new behavior. Historical event fixtures remain unchanged. Product code, credentials, and deployment settings are outside this change.
 
 ## Risks
 
@@ -31,4 +32,5 @@ The repository contains:
 - Run the OpenSpec validation script: `python3 skills/sdlc-story/scripts/validate_open_spec.py openspec/changes/jira-KAN-191-update-rajistics-demo-repo-url/`
 - Verify all URLs in documentation files reference `rajistics-demo`
 - Confirm automation registration scripts use the new default URL
-- Check that no product code or test assertions were modified
+- Run the prompt, repository-default, and full test suites; confirm no product code or historical event fixtures were modified
+- Verify the revised prompts with a live Jira Task to draft PR to review to QA run
