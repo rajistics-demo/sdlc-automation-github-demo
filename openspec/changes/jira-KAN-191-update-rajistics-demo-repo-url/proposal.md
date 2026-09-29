@@ -32,6 +32,7 @@ The SDLC Automation Demo repository has been transferred from the personal `rajs
 - README and setup guides updated with the correct GitHub organization
 - Agent Canvas and related scripts updated to use the new repository reference
 - Customer-facing Jira, review, and QA prompts shortened at the user's request while preserving the event handoffs and human gates
+- Jira webhook filter simplified to the KAN project alone; the prompt leaves issues labeled for the sidekick, dependency, or security demos to those work cells
 - Tests updated for the current repository defaults, trigger filter, and concise prompt contracts
 
 ## Impact
