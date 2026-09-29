@@ -111,8 +111,12 @@ def test_jira_prompt_is_a_short_orchestrator() -> None:
     assert spec["model"] == "Bedrock-Claude-Sonnet-4-5-fast"
     assert spec["repos"][0]["url"] == "${GITHUB_DEMO_REPO_URL}"
     assert spec["repos"][0]["ref"] == "${GITHUB_DEMO_REF}"
-    assert "sidekick-v2" in spec["trigger"]["filter"]
-    assert "!contains" in spec["trigger"]["filter"]
+    assert spec["trigger"]["filter"] == (
+        "issue.fields.project.key == '${JIRA_DEMO_PROJECT_KEY}'"
+    )
+    assert "sidekick-v2" in prompt
+    assert "dependency-remediation" in prompt
+    assert "security-remediation" in prompt
     assert "openhands-review" in prompt
     assert "Do not add `openhands-qa`" in prompt
     assert "PENDING_PET_VISIBLE" not in prompt
@@ -136,12 +140,7 @@ def test_jira_registration_keeps_credentials_out_of_prompt(monkeypatch) -> None:
         JIRA_AUTOMATIONS / "jira-to-story" / "automation.prompt-preset.json"
     )
 
-    assert payload["trigger"]["filter"] == (
-        "issue.fields.project.key == 'KAN' && issue.fields.issuetype.name == 'Task' "
-        "&& !contains(issue.fields.labels, 'sidekick-v2') "
-        "&& !contains(issue.fields.labels, 'dependency-remediation') "
-        "&& !contains(issue.fields.labels, 'security-remediation')"
-    )
+    assert payload["trigger"]["filter"] == "issue.fields.project.key == 'KAN'"
     assert payload["repos"][0]["url"] == "https://github.com/example/demo"
     assert payload["repos"][0]["ref"] == "demo-ref"
     assert "secret-value-that-must-not-expand" not in payload["prompt"]

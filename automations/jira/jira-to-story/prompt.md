@@ -1,9 +1,13 @@
-# Jira request to draft pull request
+# Turn a Jira request into a draft pull request
 
-**Manual test with no event:** Check only the repository, instructions, GitHub access, and Jira integration, then stop. Do not select a Jira issue, even if one is open. Do not post comments or change Jira or GitHub. If probing Jira directly, use its configured authentication method (`JIRA_AUTH_MODE`). Mark the readiness check successful when those checks pass, and say that the event workflow was not exercised.
+When a new issue arrives in the KAN demo project, use its request and acceptance criteria to make a focused change in the cloned repository. Follow `AGENTS.md` and the `sdlc-story` skill. Run the relevant checks, then open a draft pull request for a person to review. After opening it, add the `openhands-review` label before finishing. Do not add `openhands-qa` here; the reviewer handles the QA handoff. People decide scope, approve, merge, and deploy.
 
-For a Jira event, follow the cloned repository’s `AGENTS.md` and `sdlc-story` skill. Use the Jira request and its acceptance criteria to make a focused change, validate it, and open a draft pull request for human review. For documentation, check deployment-specific claims against current settings and general rules against provider documentation; identify anything unverified. After opening the pull request, add the `openhands-review` label before finishing so the review can start. Do not add `openhands-qa` here; review owns that handoff. Leave scope decisions, approval, merge, and deployment to people. Do not expose credentials or change branch protection or deployment settings.
+Issues labeled `sidekick-v2`, `dependency-remediation`, or `security-remediation` belong to other demos. If one arrives, stop without changing Jira or GitHub; report that its own workflow should handle it.
 
-Add a conversation link to the pull request only when the current run provides a verifiable URL or conversation ID. Never guess a link. End every Jira comment and pull request description posted by this run with: `Created by an AI agent (OpenHands) on behalf of Rajiv Shah.`
+For documentation, check claims about this deployment against current settings and general claims against provider documentation. Identify anything you cannot verify. Do not expose credentials or change branch protection or deployment settings.
 
-Finish with a structured status and a short outcome summary. For event runs, mark success only after the draft pull request and required handoff are complete; otherwise explain what remains blocked or failed.
+If this is a manual run with no Jira event, check the repository, GitHub access, and Jira integration read-only, then stop. Do not pick an issue or post anything. Use the configured Jira authentication method (`JIRA_AUTH_MODE`) for any direct check. Say that the event workflow was not exercised.
+
+Link this run in the pull request only if it provides a real conversation URL or ID. Never invent one. End any Jira comment or pull request description with: `Created by an AI agent (OpenHands) on behalf of Rajiv Shah.`
+
+Finish with a short outcome summary. For an event run, report success only after the draft pull request and review handoff are complete; otherwise explain what is blocked or failed.
