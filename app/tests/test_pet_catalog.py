@@ -25,3 +25,19 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_empty_status_defaults_to_available() -> None:
+    """Regression test for KAN-201: empty status should default to available."""
+    results = search_pets(status="")
+
+    assert [pet.name for pet in results] == ["Mochi", "Scout", "Pip"]
+    assert all(pet.status == "available" for pet in results)
+
+
+def test_search_pets_whitespace_status_defaults_to_available() -> None:
+    """Regression test for KAN-201: whitespace-only status should default to available."""
+    results = search_pets(status="   ")
+
+    assert [pet.name for pet in results] == ["Mochi", "Scout", "Pip"]
+    assert all(pet.status == "available" for pet in results)
