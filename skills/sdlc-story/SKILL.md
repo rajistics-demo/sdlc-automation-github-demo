@@ -54,6 +54,9 @@ Sparse issues are the primary demo path. The ticket should not need repo names, 
 - Use the Jira issue key and URL in artifacts and comments.
 - Keep Jira comments concise: status, evidence waypoints, PR link, tests, and any human questions.
 - Do not require the Jira ticket to mention logs, docs, repository names, file paths, or error codes.
+- For Jira API calls, use the configured `JIRA_API_BASE_URL`; use `JIRA_SITE_URL` only for human-facing issue links. Do not hard-code the Atlassian site URL as the API endpoint or derive it from the webhook.
+- Honor `JIRA_AUTH_MODE` and use the configured runtime credentials. For basic auth, pass `JIRA_SERVICE_ACCOUNT_EMAIL` and `JIRA_API_TOKEN` to the HTTP client as username and password. For bearer auth, pass `JIRA_API_TOKEN` as the bearer token. Never construct a Basic header with shell `base64`, single-quote variable references, or print credentials or authorization headers.
+- Encode the comment as valid JSON in a file before posting; use the body format required by the chosen Jira API version. Check the HTTP status and response before reporting that a comment was posted. On a 401, 403, or 404, check the configured API base URL, auth mode, and issue access; report the failure instead of treating it as transient or claiming success.
 
 ## Delegation and Context Gathering
 
@@ -61,7 +64,7 @@ Before creating change artifacts or editing files, identify what is uncertain ab
 
 Start with the highest-value independent investigation. Add a second concurrent sub-agent only when another perspective will materially improve the evidence; useful perspectives can include product requirements, repository documentation or logs, current code behavior, and focused test coverage. Use no more than two sub-agents, and give each only the issue context it needs. Never forward raw webhook payloads, secrets, credentials, environment values, or unrelated comments.
 
-Sub-agents gather evidence and return concrete paths, relevant behavior, risks, confidence, and unanswered questions. They must not edit files, mutate git, install packages, call external services, create PRs, or update Jira. The parent owns synthesis and every mutation. If the native `task` tool is unavailable or every delegated investigation fails, stop before creating artifacts or editing files and report the blocker instead of silently replacing delegation with direct work. For non-Jira requests, the parent may use bounded direct exploration when delegation would not add value.
+Sub-agents gather evidence and return concrete paths, relevant behavior, risks, confidence, and unanswered questions. They must not edit files, mutate git, install packages, call external services, create PRs, or update Jira. The parent owns synthesis and every mutation. A prepared task configuration, printed JSON, or task-tracker item is not a launched sub-agent: confirm a native `task` call and its result before proceeding. If the native `task` tool is unavailable or every delegated investigation fails, stop before creating artifacts or editing files and report the blocker instead of silently replacing delegation with direct work. For non-Jira requests, the parent may use bounded direct exploration when delegation would not add value.
 
 ## Workflow
 
