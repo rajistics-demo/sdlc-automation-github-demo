@@ -6,7 +6,7 @@ This brief turns the issue into the context the next OpenHands work cell needs. 
 
 - Event: `issues.labeled`
 - Item: `#63`
-- Source: https://github.com/rajshah4/sdlc-automation-github-demo/issues/63
+- Source: https://github.com/rajistics-demo/sdlc-automation-github-demo/issues/63
 - Title: Customers are seeing pets that are not available
 - Labels: `type:bug`, `openhands-context`
 - Body signal: Support says Nova is showing up in the available pets list even though she should not be adoptable. Logs mention PENDING_PET_VISIBLE. Please run the context scout before implementation so we can reuse repo memory, prior evidence, and targeted search.

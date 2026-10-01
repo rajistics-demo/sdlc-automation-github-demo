@@ -30,7 +30,7 @@ What to show:
 
 The context scout is triggered by a GitHub issue label, not GitHub Actions and not a comment command.
 
-1. Create or reopen an issue in `rajshah4/sdlc-automation-github-demo`.
+1. Create or reopen an issue in `rajistics-demo/sdlc-automation-github-demo`.
 2. Add the `openhands-context` label.
 3. The GitHub integration sends an `issues.labeled` event to OpenHands.
 4. The automation filter matches only issues in the configured repo where `label.name == 'openhands-context'`.

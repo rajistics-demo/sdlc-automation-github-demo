@@ -36,8 +36,8 @@ By default, registration clones `main` for each run. For a live demo branch, pas
 ```bash
 python3 scripts/automations/register_github_automations.py \
   --apply \
-  --repository rajshah4/sdlc-automation-github-demo \
-  --repo-url https://github.com/rajshah4/sdlc-automation-github-demo \
+  --repository rajistics-demo/sdlc-automation-github-demo \
+  --repo-url https://github.com/rajistics-demo/sdlc-automation-github-demo \
   --ref codex/memory-cost-overlay
 ```
 

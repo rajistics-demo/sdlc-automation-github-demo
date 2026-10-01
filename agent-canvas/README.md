@@ -61,7 +61,7 @@ From the repository root:
 ```bash
 python3 agent-canvas/scripts/start_agent_canvas_factory.py \
   --repo . \
-  --repo-slug rajshah4/sdlc-automation-github-demo \
+  --repo-slug rajistics-demo/sdlc-automation-github-demo \
   --issue-number 88
 ```
 
@@ -74,7 +74,7 @@ To use a different Agent Canvas profile for the code-review child only:
 ```bash
 python3 agent-canvas/scripts/start_agent_canvas_factory.py \
   --repo . \
-  --repo-slug rajshah4/sdlc-automation-github-demo \
+  --repo-slug rajistics-demo/sdlc-automation-github-demo \
   --issue-number 88 \
   --code-review-profile Minimax
 ```
@@ -84,7 +84,7 @@ To require Playwright UI evidence from the QA workcell:
 ```bash
 python3 agent-canvas/scripts/start_agent_canvas_factory.py \
   --repo . \
-  --repo-slug rajshah4/sdlc-automation-github-demo \
+  --repo-slug rajistics-demo/sdlc-automation-github-demo \
   --issue-number 88 \
   --require-playwright-qa \
   --playwright-node-path /path/to/node_modules

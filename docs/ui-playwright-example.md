@@ -21,7 +21,7 @@ below instead of creating a live browser-tooling dependency.
 
 The clearest UI/Playwright example is:
 
-- PR: `https://github.com/rajshah4/sdlc-automation-github-demo/pull/6`
+- PR: `https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/6`
 - Title: `Add adoption fee filter to Petstore UI`
 - Branch: `codex/ui-adoption-fee-filter`
 - QA label path: `openhands-qa` -> `openhands:done`
@@ -39,9 +39,9 @@ What to show in the PR:
   - `docs/demo-artifacts/pr6/adoption-fee-filter.png`
   - `docs/demo-artifacts/pr6/qa-report.md`
 - PR comment with the inline browser artifact:
-  - `https://github.com/rajshah4/sdlc-automation-github-demo/pull/6#issuecomment-4775361230`
+  - `https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/6#issuecomment-4775361230`
 - QA report comment:
-  - `https://github.com/rajshah4/sdlc-automation-github-demo/pull/6#issuecomment-4775349283`
+  - `https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/6#issuecomment-4775349283`
 
 ## Talk Track
 

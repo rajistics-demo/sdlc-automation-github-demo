@@ -30,8 +30,8 @@ REQUIRED_GITHUB_LABELS = {
 DEFAULTS = {
     "OPENHANDS_HOST": "https://app.replicated.rajistics.com",
     "JIRA_DEMO_PROJECT_KEY": "KAN",
-    "GITHUB_DEMO_REPOSITORY": "rajshah4/sdlc-automation-github-demo",
-    "GITHUB_DEMO_REPO_URL": "https://github.com/rajshah4/sdlc-automation-github-demo",
+    "GITHUB_DEMO_REPOSITORY": "rajistics-demo/sdlc-automation-github-demo",
+    "GITHUB_DEMO_REPO_URL": "https://github.com/rajistics-demo/sdlc-automation-github-demo",
 }
 
 

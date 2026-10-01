@@ -8,7 +8,7 @@ The Jira webhook should send `jira:issue_created` events from the `KAN` project 
 
 | Work cell | Jira trigger | Human boundary |
 | --- | --- | --- |
-| `jira-to-story` | KAN Task created | OpenHands opens or updates a PR; humans review and merge |
+| `jira-to-story` | Any KAN issue created | OpenHands opens or updates a PR; humans review and merge |
 | `jira-to-story-sidekick-v2` | KAN Task created with `sidekick-v2` label | OpenHands starts visible read-only docs/logs/repo scout conversations, then the main implementation conversation. |
 
 ## Registration Notes
@@ -23,7 +23,13 @@ Use the existing Rajistics webhook source:
 
 - Source: `jira-direct`
 - Event: `jira:issue_created`
-- Filter: `issue.fields.project.key == 'KAN' && issue.fields.issuetype.name == 'Task'`
+- Filter: all new issues in `KAN`. No Jira label or issue type is required for the main demo.
+
+The prompt tells the main work cell to stop without changing Jira or GitHub if a
+issue has the `sidekick-v2`, `dependency-remediation`, or `security-remediation`
+label. The filter will still start the main work cell for those issues, so the
+separate demo automation may also start. Keep that overlap in mind when showing
+one of the other demos.
 
 Do not include repo names, file paths, log codes, or implementation clues in demo Jira tickets.
 
