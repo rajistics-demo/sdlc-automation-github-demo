@@ -32,7 +32,28 @@ def search_pets(
     tag: str | None = None,
     max_results: int = 10,
 ) -> list[Pet]:
-    """Search pets by name, species, status, and tag."""
+    """Search pets by name, species, status, and tag.
+    
+    By default, only returns pets with status='available' to ensure customers
+    do not see pets that are pending, adopted, or otherwise unavailable.
+    
+    Args:
+        query: Pet name search term (case-insensitive substring match)
+        species: Filter by species (e.g., 'dog', 'cat', 'rabbit')
+        status: Pet status filter (default: 'available')
+        tag: Filter by tag (e.g., 'indoor', 'active')
+        max_results: Maximum number of results to return (1-50)
+    
+    Returns:
+        List of Pet objects matching the search criteria
+        
+    Raises:
+        ValueError: If max_results is not between 1 and 50
+        
+    Note:
+        The status parameter defaults to 'available' to prevent customers from
+        seeing pending pets in the default catalog view (see KAN-198).
+    """
     if max_results < 1 or max_results > 50:
         raise ValueError("max_results must be between 1 and 50")
 
