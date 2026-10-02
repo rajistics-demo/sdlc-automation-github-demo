@@ -3,6 +3,22 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_default_search_excludes_pending_pets() -> None:
+    """Regression test for KAN-194: Default search must exclude pending pets."""
+    results = search_pets()
+
+    assert all(pet.status == "available" for pet in results)
+    assert "pet-103" not in [p.id for p in results]  # Nova is pending
+
+
+def test_empty_status_defaults_to_available() -> None:
+    """Empty status string should be normalized to 'available'."""
+    results = search_pets(status="")
+
+    assert all(pet.status == "available" for pet in results)
+    assert "pet-103" not in [p.id for p in results]  # Nova is pending
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 
