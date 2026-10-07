@@ -74,15 +74,15 @@ Review the final diff against the spec and original findings. Save:
 
 Place these in `review_runs/<issue-key>/`. Identify self-review explicitly; do not describe it as an independent agent review.
 
-Update `tasks.md` to reflect completed work. Keep pending human approvals distinct from completed implementation. Describe intentional behavior changes explicitly, even when public function signatures are preserved. A self-review recommendation is not approval to merge.
+Before publication, read every final report and specification. Remove stale implementation snippets, test counts, pending-task claims, and placeholders. Distinguish historical first-pass evidence from the final result. Existing tests, regression tests, and independently performed checks must have separate, verified totals. Update `tasks.md` to reflect completed work. Keep pending human approvals distinct from completed implementation. Describe intentional behavior changes explicitly, even when public function signatures are preserved. A self-review recommendation is not approval to merge.
 
 ## Publication boundary
 
 Prepare `pr-draft.md` using [the PR description template](references/pr-description-template.md). Read the template before writing the draft or final PR body. Use the same structure for simple and complex repositories, scaling the detail to the findings.
 
-When publication is requested, return the exact repository, base/head branches, title, and complete PR body for approval. Keep the validated branch and artifacts available while awaiting approval. Approval of an earlier PR does not authorize new message content. Follow applicable repository outbound-communication rules for PRs, reviews, and Jira comments.
+When publication is requested, follow the active user authorization and applicable repository outbound-communication rules. If the user has explicitly authorized publication and messages for this demo scope, proceed within that scope without asking again. Otherwise return the exact repository, base/head branches, title, and complete PR body for approval; keep the validated artifacts available while awaiting approval. Approval of an unrelated earlier PR does not authorize new message content.
 
-After approval of the exact content and destination, publish the validated repair branch and open or update a draft PR using that approved body. Include the verified current OpenHands conversation URL in the PR description. Use a URL explicitly supplied by the runtime or operator; do not infer identity from the newest conversation or invent a URL. If the URL is missing, report the missing link before publication.
+When the current authorization permits publication, publish the validated repair branch and open or update a draft PR using that approved body. Include the verified current OpenHands conversation URL in the PR description. Use a URL explicitly supplied by the runtime or operator; do not infer identity from the newest conversation or invent a URL. Copy the supplied URL literally, including its path and query parameters; do not substitute a remembered URL. If the URL is missing, report the missing link before publication. Read the published PR back and compare its link with the supplied URL.
 
 Return the actual GitHub PR URL as a clickable link in this conversation. Verify the PR exists and its description links to this conversation before reporting publication complete. Track publication separately from code validation. Update completion status when a prior held-locally result has been published.
 
