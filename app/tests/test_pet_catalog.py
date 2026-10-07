@@ -25,3 +25,21 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_default_excludes_pending_pets() -> None:
+    """Regression test: default search should only return available pets."""
+    results = search_pets()
+
+    assert len(results) == 3
+    assert all(pet.status == "available" for pet in results)
+    assert "Nova" not in [pet.name for pet in results]
+
+
+def test_search_pets_empty_status_defaults_to_available() -> None:
+    """Regression test: empty status string should default to available."""
+    results = search_pets(status="")
+
+    assert len(results) == 3
+    assert all(pet.status == "available" for pet in results)
+    assert "Nova" not in [pet.name for pet in results]
