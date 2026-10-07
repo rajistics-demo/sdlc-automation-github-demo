@@ -1,0 +1,23 @@
+{
+  "name": "SDLC_0 - Jira Simple Defect Review",
+  "prompt": "# Jira repository review to repair\n\nA KAN Task labeled `defect-review` names the repository and review scope.\n\n1. Read the ticket and locate its repository.\n2. Use `repo-defect-triage` to find and reproduce real defects.\n3. Use `repo-defect-repair` to draft the repair spec and fix confirmed findings within scope.\n4. Apply the existing code-review and QA guidance, then validate the original defects.\n5. Save findings, spec, test evidence, and a draft PR description for human review.\n\nThe skills live in `.agents/skills/` in the configured SDLC demo checkout on `codex/jira-defect-triage`. The target repo supplies its own product rules. Only the configured Petstore and billing demo repos are in scope. If event context is absent, stop; an explicitly supplied synthetic event is allowed for rehearsals.\n\nThis demo saves publication drafts locally. Do not push fixes, post Jira/GitHub messages, open PRs, merge, or deploy. Do not archive this conversation or other conversations. Keep all demo conversations visible. Report real results and remaining defects; a PR draft file is not an opened PR.\n",
+  "trigger": {
+    "type": "event",
+    "source": "jira-direct",
+    "on": "jira:issue_created",
+    "filter": "issue.fields.project.key == 'KAN' && issue.fields.issuetype.name == 'Task' && contains(issue.fields.labels, 'defect-review') && contains(to_string(issue.fields.description), 'https://github.com/rajistics-demo/petstore-defect-demo') && !contains(to_string(issue.fields.description), 'https://github.com/rajistics-demo/billing-defect-demo')"
+  },
+  "repos": [
+    {
+      "url": "https://github.com/rajistics-demo/sdlc-automation-github-demo",
+      "ref": "codex/jira-defect-triage"
+    },
+    {
+      "url": "https://github.com/rajistics-demo/petstore-defect-demo",
+      "ref": "main"
+    }
+  ],
+  "model": "Bedrock-Claude-Sonnet-4-5-fast",
+  "timeout": 1800,
+  "keep_alive": true
+}
