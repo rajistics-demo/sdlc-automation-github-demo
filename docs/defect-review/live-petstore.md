@@ -67,6 +67,8 @@ Review the final PR description for consistent current test counts, clickable ev
 
 The initial private-repository clone stalled during this rehearsal; the agent recovered through its configured GitHub credentials. Allow setup time and keep the finished example available. Fully unattended URL injection remains a separate automation-runtime improvement.
 
-Use [billing's finished conversation](https://app.replicated.rajistics.com/canvas/conversations/d19f7e68c2604e32867f748541b85dad?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6) while Petstore runs. Lead with the final findings and validation report; use the detailed history to explain the review and repair process.
+Use the latest [billing conversation](https://app.replicated.rajistics.com/canvas/conversations/52dbfd1461164828a23d8f486918dfd9?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6), [draft PR #2](https://github.com/rajistics-demo/billing-defect-demo/pull/2), and [KAN-219](https://rajiv-shah.atlassian.net/browse/KAN-219) (**Done**) while Petstore runs. This fresh Opus 4.7 run repaired 11 initial findings, with 19 repository tests and 14 independent checks passing. Two operator-discovered concurrency gaps led to three additional regressions. Lead with the structured PR findings and measured results; use the history to explain the validation/refinement loop.
+
+For future Petstore runs, the repair skill now requires the controller’s `scripts/defect_review/verify_petstore.py <target-repo>` before publication. Its six supplied contract checks include explicit `None` input. Report these supplied checks separately from independently performed operator checks.
 
 The earlier [Petstore rehearsal](https://app.replicated.rajistics.com/canvas/conversations/be232b755ebc4c27901dcd0ca71dbecb?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6) is a fallback: 3 findings repaired, 13 repository tests and 5 independent acceptance checks passed.
