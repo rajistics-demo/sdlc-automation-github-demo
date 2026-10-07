@@ -13,3 +13,6 @@ Reuse the existing `skills/sdlc-story/references/open-spec-template.md` for arti
 6. For this operator's rehearsal, do not push, open PRs, post reviews, or write Jira comments. Keep the repaired branch and artifacts in the sandbox for inspection. Return proposed publication content and destinations for exact approval. Do not merge, deploy, or bypass infosec/pentest gates.
 
 Final response: target repository and SHA; finding IDs; spec paths; changed files; failing-before/passing-after commands; remaining findings; publication status; sandbox artifact paths. Report `validated`, `partial`, `needs-human`, or `failed` honestly. The automation transport reporting completion does not prove the repair passed.
+
+## Demo retention
+Do not archive the current conversation or any related conversation. Keep the demo history visible.

@@ -15,3 +15,6 @@ Before editing target application code, write `review_runs/<issue-key>/triage.md
 
 ## Handoff
 For review-only requests, stop after findings. For an authorized repair request, continue through `repo-defect-repair` with the request scope, findings, and baseline SHA. Read its SKILL.md from this controller repo. The handoff is local artifacts; it needs no issue publication to work. If there are no confirmed defects, say so and stop. If code is inaccessible or product intent materially ambiguous, record `needs-human` rather than fabricating a repair.
+
+## Demo retention
+Do not archive the current conversation or any related conversation. Keep the demo history visible.
