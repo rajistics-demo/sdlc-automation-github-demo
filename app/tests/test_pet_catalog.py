@@ -25,3 +25,14 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_defaults_to_available_when_status_empty() -> None:
+    """Regression test: empty status string should default to 'available', not show all pets."""
+    results = search_pets(status="")
+
+    result_names = [pet.name for pet in results]
+    assert "Nova" not in result_names, "Pending pets should not be shown when status is empty"
+    assert "Mochi" in result_names
+    assert "Scout" in result_names
+    assert "Pip" in result_names
