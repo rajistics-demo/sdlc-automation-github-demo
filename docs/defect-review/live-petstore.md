@@ -44,7 +44,7 @@ Say: “The ticket gives the agent the repo and review scope. It has to find and
 | --- | --- |
 | Automation | `SDLC_0 - Jira Simple Defect Review` enabled |
 | Model | `Bedrock-Claude-Sonnet-4-5-fast` (Sonnet 4.5) |
-| Trigger | KAN Task created with `defect-review` and the Petstore URL |
+| Trigger | KAN Task created with `defect-review`, without `defect-review-complex` |
 | Old flow | `SDLC_1 - Jira to PR` disabled |
 | Controller branch | `codex/jira-defect-triage` |
 | Target branch | `main` stays intentionally flawed |
@@ -72,3 +72,7 @@ Use the latest [billing conversation](https://app.replicated.rajistics.com/canva
 For future Petstore runs, the repair skill now requires the controller’s `scripts/defect_review/verify_petstore.py <target-repo>` before publication. Its six supplied contract checks include explicit `None` input. Report these supplied checks separately from independently performed operator checks.
 
 The earlier [Petstore rehearsal](https://app.replicated.rajistics.com/canvas/conversations/be232b755ebc4c27901dcd0ca71dbecb?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6) is a fallback: 3 findings repaired, 13 repository tests and 5 independent acceptance checks passed.
+
+## Model routing by label
+
+The trigger does not inspect repository URLs. A KAN Task with `defect-review` selects Sonnet. A KAN Task with `defect-review-complex` selects Opus; that label takes precedence if both are present, so only one automation runs. The repository and scope still come from the ticket description and are checked by the triage skill.

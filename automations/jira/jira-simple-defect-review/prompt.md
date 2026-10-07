@@ -2,7 +2,7 @@
 
 > Review existing code, prove the defects, and produce a tested repair for human review.
 
-A KAN Task labeled `defect-review` supplies the repository and review scope.
+A KAN Task labeled `defect-review` (without `defect-review-complex`) selects Sonnet and supplies the repository and review scope.
 
 | Step | Agent action | Reviewable output |
 | --- | --- | --- |

@@ -15,7 +15,7 @@ The independent checks caught a concurrent-retry defect in the first billing rep
 
 - Simple automation: `SDLC_0 - Jira Simple Defect Review`, ID `91953529-8cf5-4ee8-b42b-04ec5c339867`, model `Bedrock-Claude-Sonnet-4-5-fast`.
 - Complex automation: `SDLC_0 - Jira Complex Defect Review`, ID `6a20e4cd-23f9-4ef6-8f84-a76e58dcf5a1`, model `OpenHands-Opus-4-7` (`openai/claude-opus-4-7`).
-- Routing additionally matches the repository URL in the description and excludes the other fixture URL, preventing duplicate runs for ambiguous tickets. Plain text and Jira ADF descriptions are supported by `to_string`.
+- Model routing uses labels, not repository URLs: `defect-review` selects Sonnet; `defect-review-complex` selects Opus and takes precedence if both labels are present. The repository URL remains in the description for agent discovery and allowlist validation.
 - KAN-215 completed on Sonnet: three findings repaired, 13 repository tests and five operator acceptance checks pass.
 - KAN-216 completed its initial triage on Sonnet before the model preference arrived. It was switched to managed Opus before repairs; the first Opus inference failed with Bedrock 403 (Marketplace access). Rajiv then selected the existing `OpenHands-Opus-4-7` profile through its alternate provider, and the run resumed successfully. Billing now passes 26 repository tests and 13 operator acceptance checks, including a follow-up correction for simultaneous identical payment retries.
 - The managed Opus profile is configured through OpenHands; discovery alone does not establish usable model access.
@@ -47,7 +47,7 @@ Test ticket: https://rajiv-shah.atlassian.net/browse/KAN-215
 
 Summary: Review billing service for defects and repair them
 
-Label: `defect-review`
+Label: `defect-review-complex`
 
 ```text
 Repository: https://github.com/rajistics-demo/billing-defect-demo
