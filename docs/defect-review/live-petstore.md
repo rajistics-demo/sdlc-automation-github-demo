@@ -34,7 +34,7 @@ The trigger is **ticket creation**. Adding the label to an old ticket or editing
 | Discovery | Findings include source locations, impact, and reproductions |
 | Specification | Each selected defect maps to a requirement and regression test |
 | Repair | New tests fail before the fix and pass afterward |
-| Review | Validation evidence, self-review, and a PR draft ready for a human |
+| Review | Validation evidence, self-review, and a structured draft GitHub PR after publication approval |
 
 Say: “The ticket gives the agent the repo and review scope. It has to find and prove the problems before fixing them.” The repository includes product rules, so this is review against documented intent, not guessing what the software should do.
 
@@ -48,12 +48,24 @@ Say: “The ticket gives the agent the repo and review scope. It has to find and
 | Old flow | `SDLC_1 - Jira to PR` disabled |
 | Controller branch | `codex/jira-defect-triage` |
 | Target branch | `main` stays intentionally flawed |
-| Publication | Local PR draft; no automatic PR or Jira comment |
+| Publication | Review the exact title/body before publication; verify the actual PR and conversation links |
 | History | No archiving; sandbox files can expire, so preserve artifacts |
 
 If no run appears, check the new ticket's project, issue type, label, and exact repository URL, then inspect [Automations](https://app.replicated.rajistics.com/canvas/automations). Do not re-enable the old broad Jira flow.
 
 ## Keep the finished example ready
+
+The completed rehearsal is [KAN-217](https://rajiv-shah.atlassian.net/browse/KAN-217) (**Done**), with [draft PR #2](https://github.com/rajistics-demo/petstore-defect-demo/pull/2) and its [OpenHands conversation](https://app.replicated.rajistics.com/canvas/conversations/a1584cef4d164c199361f537f9106992?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6).
+
+It repaired three findings. The corrected result passes 12 repository tests and six separate operator acceptance checks. Running the final repository suite against the original code produces six failures. The first repair passed 11 tests but missed explicit `search_pets(None)` filtering; operator feedback prompted the agent to correct that case and add its regression test. Present that as a validation/refinement loop, not an unassisted first-pass success.
+
+### Publication handoff for the live run
+
+Use a guided live run. The Replicated prompt preset does not reliably supply its public conversation URL. If the agent asks for it, copy the actual browser URL for that run and provide it in the conversation before publishing. The rehearsal supplied that exact URL through operator feedback. Do not reuse KAN-217's URL for a new run or accept a placeholder such as `${AUTOMATION_SESSION_URL}` in the final PR body.
+
+Review the final PR description for consistent current test counts, clickable evidence links, and honest publication status. Approve its exact content, then verify the real GitHub PR link appears in the conversation and the conversation link appears in the PR. Posting a Jira completion comment requires approval of that exact message under the current outbound policy. Keep merge pending and leave the fixture's `main` unchanged.
+
+The initial private-repository clone stalled during this rehearsal; the agent recovered through its configured GitHub credentials. Allow setup time and keep the finished example available. Fully unattended URL injection remains a separate automation-runtime improvement.
 
 Use [billing's finished conversation](https://app.replicated.rajistics.com/canvas/conversations/d19f7e68c2604e32867f748541b85dad?backend=locked-cloud&org=8b24fd08-7dea-431f-aa4d-811b59a302e6) while Petstore runs. Lead with the final findings and validation report; use the detailed history to explain the review and repair process.
 
