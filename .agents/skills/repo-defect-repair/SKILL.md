@@ -72,6 +72,8 @@ Review the final diff against the spec and original findings. Save:
 
 Place these in `review_runs/<issue-key>/`. Identify self-review explicitly; do not describe it as an independent agent review.
 
+Update `tasks.md` to reflect completed work. Keep pending human approvals distinct from completed implementation. Describe intentional behavior changes explicitly, even when public function signatures are preserved. A self-review recommendation is not approval to merge.
+
 ## Publication boundary
 
 For this rehearsal, keep the repaired branch and artifacts in the sandbox. **Do not push fixes, open PRs, post reviews, or write Jira comments.** Return the exact proposed publication content and destinations for approval. Do not merge, deploy, or bypass infosec/pentest gates.
