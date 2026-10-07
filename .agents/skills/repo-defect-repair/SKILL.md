@@ -62,6 +62,8 @@ Run the new tests, the full existing suite, and relevant boundary checks.
 
 Fault-injection hooks must not become production authentication mechanisms. Fixture tests do not establish a performance or security certification.
 
+For the configured Petstore fixture, run the controller's `scripts/defect_review/verify_petstore.py <target-repo>` after your own regression suite and before publication. All six supplied contract checks must pass. If they fail, refine the code and add a repository regression for the uncovered case. Report supplied contract checks separately from repository tests and independently performed operator checks; do not claim these supplied checks were discovered by an independent agent.
+
 ## 5. Prepare human review
 
 Review the final diff against the spec and original findings. Save:
