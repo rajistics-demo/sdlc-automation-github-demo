@@ -84,6 +84,10 @@ Report the target repository and baseline SHA, finding IDs, spec paths, changed 
 
 Use an honest result: **`validated` · `partial` · `needs-human` · `failed`**. Automation transport completion does not establish that the repair passed.
 
+## Write for the reviewer
+
+Lead reports with the result, then a compact finding-to-test table and before/after test totals. Put detailed commands and logs below that overview. Keep the PR draft focused on the problem, changed behavior, validation, and remaining risks; link supporting artifacts rather than repeating their contents. Avoid decorative checkmarks, duplicate sections, and claims broader than the evidence.
+
 ## Keep the demo visible
 
 **Do not archive this conversation or any related conversation.** Preserve the demo history for human review.

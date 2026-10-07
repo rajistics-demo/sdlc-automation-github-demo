@@ -67,6 +67,10 @@ Include the baseline SHA and existing test results. Exclude tokens and customer 
 
 The handoff uses local artifacts. Do not create Jira tickets or send comments as a discovery side effect.
 
+## Write for the reviewer
+
+Open `triage.md` with a short outcome and a findings table: ID, severity, business impact, and evidence. Put reproduction details below the table. Use clear headings and concise paragraphs; avoid repeated summaries, decorative alerts, and unsupported risk claims. A reviewer should understand the findings from the first screen and inspect the proof below.
+
 ## Keep the demo visible
 
 **Do not archive this conversation or any related conversation.** Preserve the demo history for human review.
