@@ -5,10 +5,10 @@ Create a KAN Task with label `defect-review`, a Repository URL, Ref, Mode, and S
 ## Current wiring
 
 - Simple automation: `SDLC_0 - Jira Simple Defect Review`, ID `91953529-8cf5-4ee8-b42b-04ec5c339867`, model `Bedrock-Claude-Sonnet-4-5-fast`.
-- Complex automation: `SDLC_0 - Jira Complex Defect Review`, ID `6a20e4cd-23f9-4ef6-8f84-a76e58dcf5a1`, model `Bedrock-Claude-Opus-4-8`.
+- Complex automation: `SDLC_0 - Jira Complex Defect Review`, ID `6a20e4cd-23f9-4ef6-8f84-a76e58dcf5a1`, model `OpenHands-Opus-4-7` (`openai/claude-opus-4-7`).
 - Routing additionally matches the repository URL in the description and excludes the other fixture URL, preventing duplicate runs for ambiguous tickets. Plain text and Jira ADF descriptions are supported by `to_string`.
 - KAN-215 completed on Sonnet: three findings repaired, 13 repository tests and five operator acceptance checks pass.
-- KAN-216 completed its initial triage on Sonnet before the model preference arrived. It was switched to managed Opus before repairs; the first Opus inference failed with Bedrock 403 (Marketplace access). Billing remains unvalidated until Opus access works.
+- KAN-216 completed its initial triage on Sonnet before the model preference arrived. It was switched to managed Opus before repairs; the first Opus inference failed with Bedrock 403 (Marketplace access). Rajiv then selected the existing `OpenHands-Opus-4-7` profile through its alternate provider, and the run was resumed. Billing remains unvalidated until repairs and acceptance checks finish.
 - The managed Opus profile is configured through OpenHands; discovery alone does not establish usable model access.
 - Host: https://app.replicated.rajistics.com
 - Controller: https://github.com/rajistics-demo/sdlc-automation-github-demo/tree/codex/jira-defect-triage
@@ -70,3 +70,5 @@ Fixture `main` stays deliberately flawed. Each run works on a repair branch and 
 ## Bedrock Opus access blocker
 
 The observed 403 names missing `aws-marketplace:ViewSubscriptions` and `aws-marketplace:Subscribe` permissions needed to enable `us.anthropic.claude-opus-4-8`. No IAM policies or Marketplace agreements were changed. See https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html. After access is enabled, resume KAN-216 and independently verify billing repairs before calling the demo ready.
+
+The current complex automation uses the existing OpenAI-compatible Opus 4.7 profile selected by Rajiv. This is an alternate configuration path; it does not validate Bedrock Opus 4.8 access through Replicated.
