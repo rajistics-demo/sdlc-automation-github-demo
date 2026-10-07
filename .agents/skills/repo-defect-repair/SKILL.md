@@ -47,6 +47,8 @@ Create a `codex/repair-<issue-key>` branch. Add regression tests and **capture t
 
 Keep existing tests and business rules intact. Implement the smallest coherent repair. Do not rewrite the application or hardcode fixture results to satisfy checks.
 
+Check public call compatibility as well as happy paths. Preserve parameter defaults unless the spec explicitly changes them. Test explicitly supplied default values when they select default behavior; changing `status=None` to a different default must not leave `search_pets(None)` bypassing the default catalog rule.
+
 ## 4. Validate the result
 
 Run the new tests, the full existing suite, and relevant boundary checks.
