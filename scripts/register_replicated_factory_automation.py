@@ -91,7 +91,7 @@ def main() -> int:
     mode.add_argument("--apply", action="store_true")
     parser.add_argument("--env-file", type=Path)
     parser.add_argument("--project-key", default="KAN")
-    parser.add_argument("--repo-url", default="https://github.com/rajshah4/sdlc-automation-github-demo")
+    parser.add_argument("--repo-url", default="https://github.com/rajistics-demo/sdlc-automation-github-demo")
     parser.add_argument("--ref", default="main", help="Git ref cloned by the automation and used by child conversations")
     args = parser.parse_args()
 

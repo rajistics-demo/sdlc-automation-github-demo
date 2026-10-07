@@ -35,9 +35,9 @@ This repo shows two ways to run that loop:
 
 | Goal | Use this path | Starts from | Example PR |
 | --- | --- | --- | --- |
-| **Step-by-Step Control** | Human-gated labels and triggers | GitHub issue or PR label | [PR #53](https://github.com/rajshah4/sdlc-automation-github-demo/pull/53) |
-| **Complete Automation: OpenHands Enterprise/Cloud** | Parent supervisor conversation with child conversations | Jira Task event | [PR #94](https://github.com/rajshah4/sdlc-automation-github-demo/pull/94) |
-| **Complete Automation: Agent Canvas** | Parent Canvas conversation with delegated child conversations | Agent Canvas supervisor prompt | [PR #89](https://github.com/rajshah4/sdlc-automation-github-demo/pull/89) |
+| **Step-by-Step Control** | Human-gated labels and triggers | GitHub issue or PR label | [PR #53](https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/53) |
+| **Complete Automation: OpenHands Enterprise/Cloud** | Parent supervisor conversation with child conversations | Jira Task event | [PR #94](https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/94) |
+| **Complete Automation: Agent Canvas** | Parent Canvas conversation with delegated child conversations | Agent Canvas supervisor prompt | [PR #89](https://github.com/rajistics-demo/sdlc-automation-github-demo/pull/89) |
 
 ## Two Ways To Run The SDLC Loop
 
