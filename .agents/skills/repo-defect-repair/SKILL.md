@@ -76,7 +76,15 @@ Update `tasks.md` to reflect completed work. Keep pending human approvals distin
 
 ## Publication boundary
 
-For this rehearsal, keep the repaired branch and artifacts in the sandbox. **Do not push fixes, open PRs, post reviews, or write Jira comments.** Return the exact proposed publication content and destinations for approval. Do not merge, deploy, or bypass infosec/pentest gates.
+Prepare `pr-draft.md` using [the PR description template](references/pr-description-template.md). Read the template before writing the draft or final PR body. Use the same structure for simple and complex repositories, scaling the detail to the findings.
+
+When publication is requested, return the exact repository, base/head branches, title, and complete PR body for approval. Keep the validated branch and artifacts available while awaiting approval. Approval of an earlier PR does not authorize new message content. Follow applicable repository outbound-communication rules for PRs, reviews, and Jira comments.
+
+After approval of the exact content and destination, publish the validated repair branch and open or update a draft PR using that approved body. Include the verified current OpenHands conversation URL in the PR description. Use a URL explicitly supplied by the runtime or operator; do not infer identity from the newest conversation or invent a URL. If the URL is missing, report the missing link before publication.
+
+Return the actual GitHub PR URL as a clickable link in this conversation. Verify the PR exists and its description links to this conversation before reporting publication complete. Track publication separately from code validation. Update completion status when a prior held-locally result has been published.
+
+Do not merge, deploy, or bypass infosec/pentest gates. Posting separate Jira or GitHub comments requires its own applicable authorization.
 
 A PR draft is a reviewable artifact; it is not an opened pull request.
 
@@ -88,7 +96,7 @@ Use an honest result: **`validated` · `partial` · `needs-human` · `failed`**.
 
 ## Write for the reviewer
 
-Lead reports with the result, then a compact finding-to-test table and before/after test totals. Put detailed commands and logs below that overview. Keep the PR draft focused on the problem, changed behavior, validation, and remaining risks; link supporting artifacts rather than repeating their contents. Avoid decorative checkmarks, duplicate sections, and claims broader than the evidence.
+Lead reports with the result, then a compact finding-to-test table and before/after test totals. Put detailed commands and logs below that overview. PR descriptions must follow the linked template: result, request and baseline, findings and repaired behavior, implementation and specification, validation evidence, review limitations, and traceable links. Avoid decorative checkmarks, duplicate sections, and claims broader than the evidence.
 
 ## Keep the demo visible
 
