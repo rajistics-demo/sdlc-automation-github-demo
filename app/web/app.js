@@ -11,6 +11,7 @@ function renderResults() {
   const list = document.querySelector("#results");
   list.innerHTML = "";
 
+  // Filter pets to only show available ones (KAN-198: prevent pending pets from appearing in customer-facing catalog)
   const matches = pets.filter((pet) => {
     return pet.name.toLowerCase().includes(query)
       && (species === "" || pet.species === species)
