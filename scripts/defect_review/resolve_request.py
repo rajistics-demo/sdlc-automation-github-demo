@@ -17,6 +17,8 @@ def text(value):
     return ""
 
 def resolve(event):
+    if isinstance(event.get("payload"), dict):
+        event = event["payload"]
     issue = event.get("issue", {})
     fields = issue.get("fields", {})
     key = issue.get("key", "")

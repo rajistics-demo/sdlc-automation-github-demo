@@ -14,6 +14,9 @@ class ReviewRequestTests(unittest.TestCase):
         result = module.resolve(self.event("Repository: https://github.com/rajistics-demo/petstore-defect-demo\nMode: review-and-repair"))
         self.assertEqual(result["repository"], "rajistics-demo/petstore-defect-demo")
         self.assertEqual(result["mode"], "review-and-repair")
+    def test_runtime_envelope(self):
+        event = {"payload": self.event("https://github.com/rajistics-demo/petstore-defect-demo\nMode: review-and-repair")}
+        self.assertEqual(module.resolve(event)["issue_key"], "KAN-999")
     def test_adf(self):
         result = module.resolve(self.event({"type": "doc", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "https://github.com/rajistics-demo/billing-defect-demo\nMode: review-only"}]}]}))
         self.assertEqual(result["mode"], "review-only")
