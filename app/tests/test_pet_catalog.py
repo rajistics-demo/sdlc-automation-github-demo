@@ -9,6 +9,14 @@ def test_search_pets_filters_by_species_and_status() -> None:
     assert [pet.id for pet in results] == ["pet-101"]
 
 
+def test_search_pets_with_empty_status_returns_only_available() -> None:
+    """Regression test for KAN-244: empty status must default to available-only."""
+    results = search_pets(species="dog", status="")
+
+    assert [pet.id for pet in results] == ["pet-101"]
+    assert all(pet.status == "available" for pet in results)
+
+
 def test_search_pets_can_find_pending_pets_when_requested() -> None:
     results = search_pets(species="dog", status="pending")
 
