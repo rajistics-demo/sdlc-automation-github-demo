@@ -21,6 +21,16 @@ def test_search_pets_filters_by_tag() -> None:
     assert [pet.name for pet in results] == ["Mochi", "Pip"]
 
 
+def test_search_pets_with_empty_string_status_returns_only_available() -> None:
+    """Regression test for KAN-247: empty status should not bypass the filter."""
+    results = search_pets(status="")
+
+    # Should return only available pets, not pending ones like Nova
+    assert all(pet.status == "available" for pet in results)
+    assert "Nova" not in [pet.name for pet in results]
+    assert [pet.name for pet in results] == ["Mochi", "Scout", "Pip"]
+
+
 @pytest.mark.parametrize("max_results", [0, 51])
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
