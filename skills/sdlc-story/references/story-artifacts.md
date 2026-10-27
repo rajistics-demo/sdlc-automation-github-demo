@@ -15,7 +15,7 @@ Do not expect the ticket to include:
 - test names
 - implementation instructions
 
-If the issue is too ambiguous to identify a product behavior, stop and ask a human. If it maps to a known Petstore behavior, proceed by gathering evidence from docs, logs, code, and tests.
+If the issue is too ambiguous to identify a product behavior, stop and ask a human. If the intended behavior is sufficiently clear, proceed by gathering relevant evidence from the target repository.
 
 ## Evidence Waypoints
 

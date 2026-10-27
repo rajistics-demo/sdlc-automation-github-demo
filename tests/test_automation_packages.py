@@ -214,7 +214,11 @@ def test_story_skill_owns_bug_evidence_and_artifact_details() -> None:
     ]:
         assert waypoint in artifacts
 
-    assert "PENDING_PET_VISIBLE" in skill
+    petstore_examples = (
+        ROOT / "skills" / "sdlc-story" / "references" / "petstore-implementation-map.md"
+    ).read_text(encoding="utf-8")
+    assert "references/petstore-implementation-map.md" in skill
+    assert "PENDING_PET_VISIBLE" in petstore_examples
     assert "GITHUB_TOKEN" in skill
     assert "Do not use `GITHUB` or `GH_TOKEN`" in skill
     assert "docs/wiki/" in artifacts

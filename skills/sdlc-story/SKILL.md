@@ -1,6 +1,6 @@
 ---
 name: sdlc-story
-description: Turn sparse GitHub or Jira bug reports and requests into OpenSpec-style change artifacts, scoped Petstore implementation, tests, and a human-reviewable PR for the SDLC Automation Demo.
+description: Turn sparse GitHub or Jira bug reports and requests into OpenSpec-style change artifacts, a scoped implementation, tests, and a human-reviewable draft PR.
 triggers:
   - openhands-build
   - open spec
@@ -15,6 +15,18 @@ triggers:
 Use this skill when OpenHands turns a GitHub or Jira issue into a small reviewable PR.
 
 The customer-facing story is: a sparse business-language bug report becomes an OpenSpec-style change proposal, spec delta, design, and task list, then an implementation branch, then a PR that humans review and merge.
+
+## Workflow
+
+0. Understand the issue and identify the highest-value uncertainty. For every Jira-triggered story, complete at least one native read-only sub-agent investigation and synthesize its findings before creating artifacts or editing files.
+1. Read `README.md`, `AGENTS.md`, and the relevant repository guidance, then synthesize any delegated findings.
+2. **Before editing application code, create the OpenSpec-style change folder** using the skill references: proposal, design, task list, and spec delta, including assumptions and human gates appropriate to the request. These are required deliverables, not optional follow-up documentation.
+3. Validate the change artifacts with `python3 skills/sdlc-story/scripts/validate_open_spec.py <change-folder>`.
+4. Implement the smallest safe change that satisfies the spec delta and add focused tests.
+5. Run the narrowest useful validation first, expanding only when risk or repository guidance requires it.
+6. Open a draft PR with the source issue, evidence waypoints, validation results, assumptions, and human-review notes.
+7. After opening or updating the PR, add `openhands-review` as the final GitHub mutation so code review starts as a separate conversation. Do not add `openhands-qa`; the review work cell owns that handoff. A parent-child supervisor may explicitly override this when it owns downstream orchestration itself.
+8. **Complete the applicable workflow before reporting success.** Confirm the required artifacts exist, update tasks to reflect actual results, and summarize validation and handoff status. If a required step is incomplete or blocked, report that explicitly rather than declaring the workflow complete. Keep pending human approvals distinct from completed agent work.
 
 ## OpenSpec Lineage
 
@@ -66,24 +78,13 @@ Start with the highest-value independent investigation. Add a second concurrent 
 
 Sub-agents gather evidence and return concrete paths, relevant behavior, risks, confidence, and unanswered questions. They must not edit files, mutate git, install packages, call external services, create PRs, or update Jira. The parent owns synthesis and every mutation. A prepared task configuration, printed JSON, or task-tracker item is not a launched sub-agent: confirm a native `task` call and its result before proceeding. If the native `task` tool is unavailable or every delegated investigation fails, stop before creating artifacts or editing files and report the blocker instead of silently replacing delegation with direct work. For non-Jira requests, the parent may use bounded direct exploration when delegation would not add value.
 
-## Workflow
-
-0. Understand the issue and identify the highest-value uncertainty. For every Jira-triggered story, complete at least one native read-only sub-agent investigation and synthesize its findings before creating artifacts or editing files.
-1. Read `README.md`, `AGENTS.md`, and the relevant repository guidance, then synthesize any delegated findings.
-2. Use the skill references to create the OpenSpec-style proposal, design, task list, spec delta, assumptions, and human gates appropriate to the request.
-3. Validate the change artifacts with `python3 skills/sdlc-story/scripts/validate_open_spec.py <change-folder>`.
-4. Implement the smallest safe change that satisfies the spec delta and add focused tests.
-5. Run the narrowest useful validation first, expanding only when risk or repository guidance requires it.
-6. Open a draft PR with the source issue, evidence waypoints, validation results, assumptions, and human-review notes.
-7. After opening or updating the PR, add `openhands-review` as the final GitHub mutation so code review starts as a separate conversation. Do not add `openhands-qa`; the review work cell owns that handoff. A parent-child supervisor may explicitly override this when it owns downstream orchestration itself.
-
 ## Evidence Waypoints
 
 For bug-first demos, make the reasoning path visible. The conversation, PR body, and final issue comment should include these waypoints:
 
 - `Stop 1 - Ticket`: the sparse issue and the business-language clues used.
-- `Stop 2 - Wiki/Docs`: the wiki or docs checked, with paths such as `docs/wiki/petstore-catalog-availability.md`; if none are relevant or accessible, say so.
-- `Stop 3 - Logs`: log attachments or fixtures checked, with paths such as `docs/logs/pending-pet-visible.ndjson` and error codes such as `PENDING_PET_VISIBLE`; if no logs are available, say so.
+- `Stop 2 - Wiki/Docs`: the wiki or docs checked, with relevant paths; if none are relevant or accessible, say so.
+- `Stop 3 - Logs`: log attachments or fixtures checked, with relevant paths and any discovered error codes; if no logs are available, say so.
 - `Stop 4 - Repo/Files`: the repo and files that explain the bug and fix.
 - `Stop 5 - Tests/PR`: tests added or run, validation result, and draft PR link.
 
@@ -105,47 +106,11 @@ The change folder must include:
 
 If a request has unresolved product, security, data, or environment questions, post the partial OpenSpec-style change and label `openhands:needs-human` instead of guessing.
 
-## Petstore Map
+## Repository Context and Examples
 
-- Catalog behavior: `app/petstore_app/catalog.py`
-- Adoption behavior: `app/petstore_app/adoptions.py`
-- Static UI: `app/web/`
-- Tests: `app/tests/`
-- OpenSpec-style changes: `openspec/changes/github-issue-<number>-<slug>/`
-- Jira OpenSpec-style changes: `openspec/changes/jira-<issue-key>-<slug>/`
+Use the target repository's instructions, documentation, code, and tests to establish its product rules. Examples illustrate the workflow; they do not supply requirements for an unrelated request.
 
-## Sparse Bug Examples
-
-`Customers are seeing pets that are not available` means:
-
-- default available-pets search must exclude pets with `status="pending"`
-- correlate the symptom with `PENDING_PET_VISIBLE` evidence when logs or fixtures are present
-- inspect `app/petstore_app/catalog.py` and existing tests before changing behavior
-- add or repair focused tests proving pending pets stay out of default available results
-- do not mutate deployment settings, secrets, auth, or unrelated UI behavior
-
-`Nova is showing up as adoptable` means:
-
-- map Nova to `pet-103` and confirm her status is `pending`
-- preserve explicit pending searches when the caller asks for `status="pending"`
-- keep the default catalog path available-only
-- add focused regression coverage
-
-## Sparse Feature Examples
-
-`Filter pets by max adoption fee` means:
-
-- add an optional max-fee filter to catalog search, using integer cents
-- expose a simple static UI input only if the issue or PR scope includes UI
-- add focused backend tests for match, exclusion, and invalid negative fees
-- do not add payment processing, persistence, billing, auth, or dependencies
-
-`Let adopters search by age range` means:
-
-- add optional min/max age filters
-- reject negative ages and inverted ranges
-- keep default search limited to available pets
-- add focused backend tests
+For the Petstore demo, see [the implementation map](references/petstore-implementation-map.md).
 
 ## Stop Conditions
 
