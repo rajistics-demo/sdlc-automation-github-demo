@@ -18,7 +18,7 @@ The customer-facing story is: a sparse business-language bug report becomes an O
 
 ## Workflow
 
-0. Understand the issue and identify the highest-value uncertainty. For every Jira-triggered story, complete at least one native read-only sub-agent investigation and synthesize its findings before creating artifacts or editing files.
+0. Understand the issue and identify the highest-value uncertainty. For Jira-triggered stories, use at least one native read-only sub-agent investigation when the tool is available; follow the fallback below when it is unavailable.
 1. Read `README.md`, `AGENTS.md`, and the relevant repository guidance, then synthesize any delegated findings. For a bug report, reproduce the behavior through the actual application entry point, including relevant input variants; a passing default-path test or copied logic does not establish that the reported defect is absent.
 2. **Before editing application code, create the OpenSpec-style change folder** using the skill references: proposal, design, task list, and spec delta, including assumptions and human gates appropriate to the request. These are required deliverables, not optional follow-up documentation.
 3. Validate the change artifacts with `python3 skills/sdlc-story/scripts/validate_open_spec.py <change-folder>`.
@@ -56,7 +56,7 @@ Sparse issues are the primary demo path. The ticket should not need repo names, 
 - Status labels: `openhands:ready`, `openhands:in-progress`, `openhands:needs-human`, `openhands:done`
 - Use event context; do not poll GitHub.
 - Avoid result comments that repeat the exact trigger text.
-- Use runtime secret `GITHUB_TOKEN` for GitHub API calls, `gh`, pushes, PRs, labels, and comments. Do not use `GITHUB` or `GH_TOKEN`; if auth is missing or returns 401, stop and report `GITHUB_TOKEN` is missing or invalid without printing it.
+- Use runtime secret `GITHUB_TOKEN` for GitHub API calls, pushes, PRs, labels, and comments. For `gh`, supply that same credential as `GH_TOKEN` for the command and set `GH_PROMPT_DISABLED=1`; PR creation must specify `--head <source-branch>` and `--base <target-branch>` so it cannot pause for a push destination. Do not create credentials or run interactive login. If authentication is missing or returns 401, stop and report the failure without printing credentials.
 - Do not run `git remote -v`, `gh auth status`, or any command that prints token-bearing remote URLs. Use GitHub tools or API calls for PR creation and label/comment updates, and never echo auth-bearing remotes, token previews, or authorization headers.
 - Never merge, bypass review, change branch protection, or alter deployment settings.
 
@@ -72,11 +72,11 @@ Sparse issues are the primary demo path. The ticket should not need repo names, 
 
 ## Delegation and Context Gathering
 
-Before creating change artifacts or editing files, identify what is uncertain about the request and what evidence would reduce that uncertainty. Every Jira-triggered story must launch at least one read-only sub-agent through the native `task` tool, normally using the `code-explorer` type. Choose each sub-agent's role, prompt, scope, and evidence request from the actual story rather than following a fixed decomposition.
+Before creating change artifacts or editing files, identify what is uncertain about the request and what evidence would reduce that uncertainty. When the native `task` tool is available, every Jira-triggered story must launch at least one read-only sub-agent, normally using the `code-explorer` type. Choose each sub-agent's role, prompt, scope, and evidence request from the actual story rather than following a fixed decomposition.
 
 Start with the highest-value independent investigation. Add a second concurrent sub-agent only when another perspective will materially improve the evidence; useful perspectives can include product requirements, repository documentation or logs, current code behavior, and focused test coverage. Use no more than two sub-agents, and give each only the issue context it needs. Never forward raw webhook payloads, secrets, credentials, environment values, or unrelated comments.
 
-Sub-agents gather evidence and return concrete paths, relevant behavior, risks, confidence, and unanswered questions. They must not edit files, mutate git, install packages, call external services, create PRs, or update Jira. The parent owns synthesis and every mutation. A prepared task configuration, printed JSON, or task-tracker item is not a launched sub-agent: confirm a native `task` call and its result before proceeding. If the native `task` tool is unavailable or every delegated investigation fails, stop before creating artifacts or editing files and report the blocker instead of silently replacing delegation with direct work. For non-Jira requests, the parent may use bounded direct exploration when delegation would not add value.
+Sub-agents gather evidence and return concrete paths, relevant behavior, risks, confidence, and unanswered questions. They must not edit files, mutate git, install packages, call external services, create PRs, or update Jira. The parent owns synthesis and every mutation. A prepared task configuration, printed JSON, or task-tracker item is not a launched sub-agent: when delegating, confirm a native `task` call and its result. If the native `task` tool is unavailable, proceed with bounded direct investigation without announcing sub-agent availability issues. Use only exposed tools; never simulate or claim delegation that did not occur. If delegated investigations fail and missing evidence prevents a safe decision, ask for human input. For non-Jira requests, use bounded direct exploration when delegation would not add value.
 
 ## Evidence Waypoints
 
