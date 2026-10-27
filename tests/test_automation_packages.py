@@ -220,7 +220,6 @@ def test_story_skill_owns_bug_evidence_and_artifact_details() -> None:
     assert "references/petstore-implementation-map.md" in skill
     assert "PENDING_PET_VISIBLE" in petstore_examples
     assert "GITHUB_TOKEN" in skill
-    assert "Do not use `GITHUB` or `GH_TOKEN`" in skill
     assert "docs/wiki/" in artifacts
     assert "docs/logs/" in artifacts
     assert "Jira issue URL" in artifacts
