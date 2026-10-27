@@ -32,7 +32,7 @@ tasks.md
 specs/<capability>/spec.md
 ```
 
-See `openspec-change-template/` for a complete example folder that can be
+See `openspec-change-template/` for a worked Petstore example, not a set of requirements for other repositories. The example folder can be
 validated with:
 
 ```bash
@@ -105,7 +105,7 @@ python3 skills/sdlc-story/scripts/validate_open_spec.py \
 
 ## Context
 
-<Relevant Petstore behavior and constraints.>
+<Relevant behavior and constraints of the target repository.>
 
 ## Decision
 
@@ -144,7 +144,7 @@ python3 skills/sdlc-story/scripts/validate_open_spec.py \
 
 ## Scope Guardrails
 
-Keep a request in this skill only when it can produce a small Petstore PR. Stop and ask for human input when the request needs:
+Keep a request in this skill when it can produce a scoped, reviewable PR. Stop and ask for human input when the request needs:
 
 - new secrets or production credentials
 - auth, IAM, billing, or payment decisions

@@ -1,6 +1,6 @@
 # Petstore Implementation Map
 
-Use this reference when a sparse GitHub request needs to be grounded in the demo app.
+Use this reference when a sparse GitHub or Jira request concerns the Petstore demo app. These examples do not define requirements for other repositories.
 
 ## Core Files
 
