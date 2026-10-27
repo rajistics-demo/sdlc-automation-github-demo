@@ -19,11 +19,11 @@ The customer-facing story is: a sparse business-language bug report becomes an O
 ## Workflow
 
 0. Understand the issue and identify the highest-value uncertainty. For every Jira-triggered story, complete at least one native read-only sub-agent investigation and synthesize its findings before creating artifacts or editing files.
-1. Read `README.md`, `AGENTS.md`, and the relevant repository guidance, then synthesize any delegated findings.
+1. Read `README.md`, `AGENTS.md`, and the relevant repository guidance, then synthesize any delegated findings. For a bug report, reproduce the behavior through the actual application entry point, including relevant input variants; a passing default-path test or copied logic does not establish that the reported defect is absent.
 2. **Before editing application code, create the OpenSpec-style change folder** using the skill references: proposal, design, task list, and spec delta, including assumptions and human gates appropriate to the request. These are required deliverables, not optional follow-up documentation.
 3. Validate the change artifacts with `python3 skills/sdlc-story/scripts/validate_open_spec.py <change-folder>`.
-4. Implement the smallest safe change that satisfies the spec delta and add focused tests.
-5. Run the narrowest useful validation first, expanding only when risk or repository guidance requires it.
+4. Implement the smallest safe change that satisfies the spec delta and add focused tests. For a bug fix, retain a reproduction that fails on the original code and passes after the change. If the defect cannot be reproduced, report the investigation and its limits rather than claiming a test-only change fixes it.
+5. Run the narrowest useful validation first, expanding only when risk or repository guidance requires it. Update `tasks.md` as results become known; keep human approvals pending until a person grants them.
 6. Open a draft PR with the source issue, evidence waypoints, validation results, assumptions, and human-review notes.
 7. After opening or updating the PR, add `openhands-review` as the final GitHub mutation so code review starts as a separate conversation. Do not add `openhands-qa`; the review work cell owns that handoff. A parent-child supervisor may explicitly override this when it owns downstream orchestration itself.
 8. **Complete the applicable workflow before reporting success.** Confirm the required artifacts exist, update tasks to reflect actual results, and summarize validation and handoff status. If a required step is incomplete or blocked, report that explicitly rather than declaring the workflow complete. Keep pending human approvals distinct from completed agent work.

@@ -21,6 +21,7 @@ The review should feel like a senior engineer looking for real defects, not a st
 - Prefer a structured PR review with inline findings when line context is available.
 - Do not approve, merge, push fixes, or update branch protection from this skill.
 - Avoid result comments that repeat the exact trigger text.
+- For an authorized review comment, use [the publication helper](references/publishing-review.md). Verification must read the existing comment, never execute a second comment-creation command.
 - Use runtime secret `GITHUB_TOKEN` for GitHub API calls, reviews, labels, and comments. Do not use `GITHUB` or `GH_TOKEN`; if auth is missing or returns 401, stop and report `GITHUB_TOKEN` is missing or invalid without printing it.
 
 ## Context Reuse
@@ -59,7 +60,7 @@ Run `python3 skills/sdlc-code-review/scripts/review_checklist.py` for a determin
 ## Evidence Expectations
 
 - Read the PR body, diff, linked issue, and OpenSpec-style change folder if present.
-- Verify tests match changed behavior.
+- Verify tests match changed behavior. For a claimed bug fix, inspect the failing-before/passing-after reproduction; passing happy-path tests alone do not establish that the reported defect was fixed.
 - Call out claims that are not backed by commands or UI evidence.
 - If no issues are found, say that clearly and note any residual risk or test gap.
 
