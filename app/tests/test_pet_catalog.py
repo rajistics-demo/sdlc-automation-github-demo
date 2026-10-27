@@ -3,6 +3,25 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_default_search_excludes_pending_pets() -> None:
+    """Default search must exclude pending pets like Nova (pet-103).
+    
+    Product rule: Default customer-facing catalog search must show only
+    pets with status='available'. This prevents customers from seeing
+    and attempting to adopt pets that are not yet ready.
+    
+    Bug evidence: PENDING_PET_VISIBLE error indicated pet-103 was visible.
+    """
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    pet_names = [pet.name for pet in results]
+    
+    assert "pet-103" not in pet_ids, "Nova (pending pet) should not appear in default search"
+    assert "Nova" not in pet_names, "Nova should not appear by name in default search"
+    assert all(pet.status == "available" for pet in results), "All default results must have status='available'"
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 
