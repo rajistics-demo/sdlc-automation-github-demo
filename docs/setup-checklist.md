@@ -53,6 +53,23 @@ paste secret values into this file.
 - For visible sidekick runs, prefer `sandbox_grouping_strategy=FEWEST_CONVERSATIONS`
   so scout and implementation conversations can start promptly.
 
+## Runtime Test Preparation
+
+Prepare the Python interpreter used by the agent's terminal before a live story
+conversation starts. Installing pytest into an unrelated launcher virtualenv is
+not sufficient. For the validated demo baseline, provide `pytest==9.1.1` and run
+`python3 -m pytest --version` in that terminal environment during setup.
+
+From the application checkout, use `python3 -m pytest -q app/tests`; imports are
+configured by `pyproject.toml`. Do not use an editable install for this flat-layout
+repository. Check package readiness before opening the timed conversation; do not
+add package installation to the story or review helpers.
+
+These are setup requirements, not an automatic setup hook. The current preset
+must be inspected and its existing preparation step explicitly updated before
+claiming that new sandboxes satisfy them. Keep the existing runtime and model
+versions; no platform upgrade is needed for these test commands.
+
 ## Jira
 
 - Jira admin webhook points to the Rajistics `jira-direct` webhook URL:

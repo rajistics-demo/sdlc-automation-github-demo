@@ -24,6 +24,14 @@ This is the GitHub-native SDLC Automation Demo. Customer-facing language should 
 - Use event-driven GitHub triggers instead of polling.
 - Avoid dependency installation in automation helper scripts unless a prompt explicitly authorizes it.
 
+## Start From Existing Context
+
+For story-to-PR work, start with `skills/sdlc-story/SKILL.md` and `docs/repo-memory/petstore-intelligence.md`; use the linked implementation map before broad file discovery.
+
+App tests run directly from the checkout with `python3 -m pytest -q app/tests`. The sandbox setup should provide pytest before the conversation starts; this repository does not support `pip install -e .`. If pytest is missing, report the setup gap rather than trying packaging workarounds.
+
+Automation checkouts can be shallow. Check `git rev-parse --is-shallow-repository` before treating history as evidence; a grafted root does not show when its files were introduced.
+
 ## Petstore Product Rules
 
 - Default pet search returns only available pets.
