@@ -3,6 +3,12 @@
 Use this checklist to configure the GitHub-native SDLC Automation Demo. Do not
 paste secret values into this file.
 
+## Repository Location
+
+This repository is hosted at https://github.com/rajistics-demo/sdlc-automation-github-demo.
+
+**After a repository transfer:** GitHub automatically redirects web page links (issues, PRs, etc.) from the old location to the new one. However, OpenHands event filters and cloned repository settings must explicitly reference the new organization name (`rajistics-demo`). The automation registration scripts in this repository use the new URL as their default.
+
 ## GitHub
 
 - Demo repository is available to the self-hosted OpenHands GitHub App.

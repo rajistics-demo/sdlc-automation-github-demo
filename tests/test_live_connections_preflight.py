@@ -141,8 +141,8 @@ def test_live_preflight_requires_runtime_github_token(monkeypatch) -> None:
         "JIRA_API_TOKEN": "demo",
         "JIRA_SITE_URL": "https://jira.example.invalid",
         "JIRA_DEMO_PROJECT_KEY": "KAN",
-        "GITHUB_DEMO_REPOSITORY": "rajshah4/sdlc-automation-github-demo",
-        "GITHUB_DEMO_REPO_URL": "https://github.com/rajshah4/sdlc-automation-github-demo",
+        "GITHUB_DEMO_REPOSITORY": "rajistics-demo/sdlc-automation-github-demo",
+        "GITHUB_DEMO_REPO_URL": "https://github.com/rajistics-demo/sdlc-automation-github-demo",
     }.items():
         monkeypatch.setenv(key, value)
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)

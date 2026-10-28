@@ -40,7 +40,7 @@ from urllib.request import Request, urlopen
 
 
 DEFAULT_HOST = "https://app.replicated.rajistics.com"
-DEFAULT_REPOSITORY = "rajshah4/sdlc-automation-github-demo"
+DEFAULT_REPOSITORY = "rajistics-demo/sdlc-automation-github-demo"
 DEFAULT_BRANCH = "main"
 DEFAULT_LITELLM_MODEL = "litellm_proxy/us.anthropic.claude-sonnet-4-5-20250929-v1:0"
 DEFAULT_SCOUT_MODEL = "litellm_proxy/us.anthropic.claude-haiku-4-5-20251001-v1:0"

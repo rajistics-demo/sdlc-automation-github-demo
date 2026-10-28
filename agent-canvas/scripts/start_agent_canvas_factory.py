@@ -29,11 +29,11 @@ def git_remote_slug(repo: Path) -> str:
             text=True,
         )
     except OSError:
-        return "rajshah4/sdlc-automation-github-demo"
+        return "rajistics-demo/sdlc-automation-github-demo"
 
     remote = result.stdout.strip()
     if not remote:
-        return "rajshah4/sdlc-automation-github-demo"
+        return "rajistics-demo/sdlc-automation-github-demo"
     if remote.startswith("git@github.com:"):
         remote = remote.removeprefix("git@github.com:").removesuffix(".git")
     if remote.startswith("https://github.com/"):

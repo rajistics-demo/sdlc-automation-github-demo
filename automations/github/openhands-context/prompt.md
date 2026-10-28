@@ -32,7 +32,7 @@ Post a concise issue comment with:
 - whether the next agent should open a PR or first prove existing code already handles the request
 - the minimum raw material needed for a future PR, such as specific file paths, short source snippets, and test names
 - recommended model tier for scout, implementation, QA, and review phases
-- a full-report link to `https://github.com/rajshah4/sdlc-automation-github-demo/blob/main/docs/context-reuse/latest-context-reuse-report.md`, or a PR link when a fresh report was committed
+- a full-report link to `https://github.com/rajistics-demo/sdlc-automation-github-demo/blob/main/docs/context-reuse/latest-context-reuse-report.md`, or a PR link when a fresh report was committed
 
 Do not post a search transcript. It is fine to say where the scout learned something, but keep citations compact and tied to the decision: issue source, repo memory, skill, evidence file, or specific code/test path.
 

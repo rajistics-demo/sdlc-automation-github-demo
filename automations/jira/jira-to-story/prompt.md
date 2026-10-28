@@ -1,51 +1,9 @@
-# SDLC Automation Demo: Jira Request To PR
+# Jira issue to draft pull request
 
-## What Triggered This
+For each new KAN issue, follow the repository’s `AGENTS.md` and `sdlc-story` skill. Use the issue and its acceptance criteria to make a focused change, run relevant checks, and open a draft pull request. After opening it, add the `openhands-review` label before finishing. Do not add `openhands-qa`; review handles the QA handoff. People approve scope, pull requests, merges, and deployments.
 
-A new Jira request started this automation. The request may be brief and written
-entirely in business language.
+If the issue has `sidekick-v2`, `dependency-remediation`, or `security-remediation`, leave it to that demo. Stop without changing Jira or GitHub. For documentation, verify deployment claims against current settings and general claims against provider docs; flag what you cannot verify.
 
-## What You Do
+For a manual run without a Jira event, check only the repository, GitHub access, and Jira integration, then stop. Do not pick an issue or post anything. Use the configured Jira authentication method (`JIRA_AUTH_MODE`) for direct checks, and say the event workflow was not exercised.
 
-1. Understand the request, its context, and any acceptance criteria.
-2. Follow the repository's SDLC story skill to turn the request into an
-   OpenSpec-style proposal, design, task list, and test plan.
-3. Implement the smallest safe change and create a draft pull request.
-4. Record assumptions, evidence, and validation results in the pull request.
-5. After the draft pull request is open, add the `openhands-review` label to it
-   so the code-review work cell starts as a separate conversation. Do this label
-   handoff before finishing so the next stage does not depend on conversation
-   shutdown. Do not add `openhands-qa` or `openhands:done` here; those are owned
-   by the review and QA work cells.
-
-## Conversation Link
-
-This automation's OpenHands conversation URL is appended to the end of this
-prompt by the runtime. Include it in the pull-request description so reviewers
-can trace the work back to the agent session that produced it. Add it as a
-concise line near the end of the PR body:
-
-`OpenHands conversation: <url>`
-
-Copy the URL exactly as provided — do not write a shell variable or
-placeholder. On self-hosted deployments the URL is injected by a custom
-automation script; see `docs/automation-conversation-link-gap.md` for the
-background and the workaround.
-
-## What You Post Back To Jira
-
-- A concise status update and link to the draft pull request.
-- The validation performed and any assumptions that need confirmation.
-- A clear question when a product or engineering decision requires human input.
-
-## Human Control
-
-People remain responsible for scope, pull-request review, merge, deployment, and
-any risky follow-up. Automated QA validates the change; it never approves or
-merges it.
-
-## Operating Boundaries
-
-Use the configured Jira and GitHub integrations and follow the repository-local
-skills. Keep the workflow event-driven, protect credentials, and do not change
-production resources, deployment settings, or branch protection.
+Link this run only if it provides a real conversation URL or ID. End any Jira comment or pull request description with: `Created by an AI agent (OpenHands) on behalf of Rajiv Shah.` Never expose credentials or change branch protection or deployment settings. Report success only after the draft pull request and review handoff; otherwise explain what failed.

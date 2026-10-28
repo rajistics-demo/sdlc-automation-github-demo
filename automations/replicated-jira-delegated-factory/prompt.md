@@ -33,7 +33,7 @@ Run this from the repository root after replacing `<ISSUE_KEY>`:
 ```bash
 python3 scripts/run_replicated_factory.py \
   --base-url https://app.replicated.rajistics.com \
-  --repo-slug rajshah4/sdlc-automation-github-demo \
+  --repo-slug rajistics-demo/sdlc-automation-github-demo \
   --branch ${GITHUB_DEMO_REF} \
   --issue-key <ISSUE_KEY> \
   --start-timeout-seconds 180 \
