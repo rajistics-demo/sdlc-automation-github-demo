@@ -3,6 +3,33 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_search_pets_default_excludes_pending() -> None:
+    """Default search must return only available pets, excluding Nova (pending)."""
+    results = search_pets()
+
+    pet_names = [pet.name for pet in results]
+    assert "Nova" not in pet_names
+    assert all(pet.status == "available" for pet in results)
+
+
+def test_search_pets_empty_status_excludes_pending() -> None:
+    """Empty status string must be treated as 'available', excluding Nova (pending)."""
+    results = search_pets(status="")
+
+    pet_names = [pet.name for pet in results]
+    assert "Nova" not in pet_names
+    assert all(pet.status == "available" for pet in results)
+
+
+def test_search_pets_whitespace_status_excludes_pending() -> None:
+    """Whitespace-only status must be treated as 'available', excluding Nova (pending)."""
+    results = search_pets(status="  ")
+
+    pet_names = [pet.name for pet in results]
+    assert "Nova" not in pet_names
+    assert all(pet.status == "available" for pet in results)
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 
