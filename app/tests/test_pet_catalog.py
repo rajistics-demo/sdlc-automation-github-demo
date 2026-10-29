@@ -9,6 +9,17 @@ def test_search_pets_filters_by_species_and_status() -> None:
     assert [pet.id for pet in results] == ["pet-101"]
 
 
+def test_search_pets_excludes_pending_by_default() -> None:
+    """Regression test for KAN-204: pending pets must not appear in default searches."""
+    results = search_pets()
+
+    # Nova (pet-103) has status="pending" and should be excluded
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids
+    # Only available pets should appear
+    assert set(pet_ids) == {"pet-100", "pet-101", "pet-102"}
+
+
 def test_search_pets_can_find_pending_pets_when_requested() -> None:
     results = search_pets(species="dog", status="pending")
 
