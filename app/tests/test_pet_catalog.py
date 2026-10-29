@@ -9,6 +9,24 @@ def test_search_pets_filters_by_species_and_status() -> None:
     assert [pet.id for pet in results] == ["pet-101"]
 
 
+def test_search_pets_default_excludes_pending() -> None:
+    """Default search should not return pending pets like Nova."""
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids
+    assert all(pet.status == "available" for pet in results)
+
+
+def test_search_pets_empty_status_excludes_pending() -> None:
+    """Empty status string should not bypass the status filter."""
+    results = search_pets(status="")
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids
+    assert all(pet.status == "available" for pet in results)
+
+
 def test_search_pets_can_find_pending_pets_when_requested() -> None:
     results = search_pets(species="dog", status="pending")
 
