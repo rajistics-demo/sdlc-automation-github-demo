@@ -25,3 +25,20 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_excludes_pending_from_default_results() -> None:
+    """Regression test for KAN-213: pending pets must not appear in default searches."""
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids, "Nova (pet-103) is pending and should not appear in default results"
+    assert "pet-101" in pet_ids, "Scout (pet-101) is available and should appear"
+
+
+def test_search_pets_excludes_pending_when_status_is_empty_string() -> None:
+    """Verify empty status string does not bypass the availability filter."""
+    results = search_pets(status="")
+
+    pet_ids = [pet.id for pet in results]
+    assert len(pet_ids) == 0, "Empty status should not match any pets"
