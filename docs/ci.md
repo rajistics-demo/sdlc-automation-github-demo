@@ -1,11 +1,16 @@
 # CI in the SDLC Automation Demo
 
-The agent opens a draft PR. GitHub Actions runs **Python tests** alongside
+The agent opens a draft PR. GitHub Actions runs **Application tests** alongside
 agent code review. Independent QA follows as a separate stage, and a person
 decides whether to merge or send the change back.
 
 CI runs on PR creation, reopening, and each new commit, including draft PRs.
-It runs `python -m pytest -q` across `app/tests` and `tests` using Python 3.11.
+It runs `python -m pytest -q app/tests` using Python 3.11. These tests cover
+catalog and adoption behavior. The demo-tooling suite in `tests` checks context
+reports, prompt packages, and automation helpers; run it during demo maintenance
+with `python -m pytest -q`. It is outside the application CI check, so generated
+planning documents cannot fail that check through context-report ranking.
+A green application check does not establish demo-tooling or browser coverage.
 It needs no configured secrets or OpenHands API access. Standard GitHub-hosted
 runners are free for this public repository; small JUnit reports expire after
 seven days to limit storage. Action commit pins and test dependencies need
@@ -26,8 +31,8 @@ protection. Those are separate repository policy decisions.
 
 ## Validate before presenting
 
-On an agent-created demo PR, retain a behavioral test that fails on the original
-code and show the red CI run. Push the fix to the same PR and show the new green
-run. Confirm the full suite passed and the recorded head matches the PR, then
-verify fresh agent review and independent QA for that head. UI changes still
-need UI evidence. Human review and merge remain pending.
+Before a presentation, validate a representative agent-created PR and confirm
+the application tests pass for its recorded head. During the demo, show the
+application check alongside agent review, then independent QA and human review.
+Application test failures remain failures; the workflow does not suppress them.
+UI changes still need UI evidence. Human review and merge remain pending.
