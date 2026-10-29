@@ -35,6 +35,8 @@ def search_pets(
     """Search pets by name, species, status, and tag."""
     if max_results < 1 or max_results > 50:
         raise ValueError("max_results must be between 1 and 50")
+    if not status.strip():
+        raise ValueError("status cannot be empty")
 
     normalized_query = query.strip().lower()
     normalized_species = species.strip().lower() if species else None
