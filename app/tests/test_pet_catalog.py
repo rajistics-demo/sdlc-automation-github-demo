@@ -25,3 +25,13 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_rejects_empty_status() -> None:
+    with pytest.raises(ValueError, match="status cannot be empty"):
+        search_pets(status="")
+
+
+def test_search_pets_rejects_whitespace_status() -> None:
+    with pytest.raises(ValueError, match="status cannot be empty"):
+        search_pets(status="  ")
