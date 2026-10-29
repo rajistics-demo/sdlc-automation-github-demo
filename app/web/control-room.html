@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SDLC Automation · Control Room</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="control-room.css">
+  </head>
+  <body class="cr-body">
+
+    <!-- ── Header ── -->
+    <header class="cr-header">
+      <div class="cr-header-inner">
+        <div class="cr-brand">
+          <svg class="cr-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M7 7h10M7 11h6"/>
+          </svg>
+          <div>
+            <p class="cr-brand-name">SDLC Automation</p>
+            <p class="cr-brand-sub">CONTROL ROOM</p>
+          </div>
+        </div>
+
+        <nav class="cr-workflow" aria-label="Pipeline stages">
+          <span class="cr-stage cr-stage--active">Request</span>
+          <span class="cr-arrow" aria-hidden="true">→</span>
+          <span class="cr-stage cr-stage--active">Implement</span>
+          <span class="cr-arrow" aria-hidden="true">→</span>
+          <span class="cr-stage cr-stage--active">Tests</span>
+          <span class="cr-arrow" aria-hidden="true">→</span>
+          <span class="cr-stage cr-stage--active">Review</span>
+          <span class="cr-arrow" aria-hidden="true">→</span>
+          <span class="cr-stage cr-stage--done">Release</span>
+        </nav>
+
+        <div class="cr-header-right">
+          <span class="cr-clock" id="cr-clock" aria-live="polite"></span>
+          <div class="cr-avatar" title="Engineering Lead" aria-label="Engineering Lead">EL</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Main ── -->
+    <main class="cr-main">
+
+      <!-- page title -->
+      <div class="cr-page-title">
+        <div>
+          <h1>Control Room</h1>
+          <p class="cr-date" id="cr-date"></p>
+        </div>
+        <a href="index.html" class="cr-back-link">← Petstore App</a>
+      </div>
+
+      <!-- ── Stats ── -->
+      <section class="cr-stats" aria-label="Summary metrics">
+        <div class="cr-stat cr-stat--violet">
+          <div class="cr-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <p class="cr-stat-label">Agents Active</p>
+            <p class="cr-stat-value">5</p>
+            <p class="cr-stat-delta cr-delta--up">↑ +2 vs yesterday</p>
+          </div>
+        </div>
+        <div class="cr-stat cr-stat--amber">
+          <div class="cr-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-4.418 0-8-1.79-8-4s3.582-4 8-4 8 1.79 8 4-3.582 4-8 4z"/><path d="M17.5 8c2.485 0 4.5 1.12 4.5 2.5S19.985 13 17.5 13"/></svg>
+          </div>
+          <div>
+            <p class="cr-stat-label">Awaiting Review</p>
+            <p class="cr-stat-value">3</p>
+            <p class="cr-stat-delta cr-delta--warn">⚠ 1 high priority</p>
+          </div>
+        </div>
+        <div class="cr-stat cr-stat--green">
+          <div class="cr-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <p class="cr-stat-label">Shipped Today</p>
+            <p class="cr-stat-value">4</p>
+            <p class="cr-stat-delta cr-delta--up">↑ +1 vs target</p>
+          </div>
+        </div>
+        <div class="cr-stat cr-stat--blue">
+          <div class="cr-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div>
+            <p class="cr-stat-label">Build Pass Rate</p>
+            <p class="cr-stat-value">98.2%</p>
+            <p class="cr-stat-delta cr-delta--up">↑ +0.4% this week</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Pipeline + Sidebar ── -->
+      <div class="cr-layout">
+
+        <!-- Pipeline Board -->
+        <section class="cr-pipeline-section" aria-label="Delivery pipeline">
+          <div class="cr-section-header">
+            <h2>Delivery Pipeline</h2>
+            <span class="cr-live-badge"><span class="cr-pulse" aria-hidden="true"></span>Live</span>
+          </div>
+
+          <!-- horizontal scroll wrapper -->
+          <div class="cr-pipeline-scroll">
+            <div class="cr-pipeline">
+
+              <!-- REQUEST -->
+              <div class="cr-col cr-col--indigo">
+                <div class="cr-col-head">
+                  <div class="cr-col-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 4v16M2 8h20"/></svg>
+                    Request
+                  </div>
+                  <span class="cr-col-count">3</span>
+                </div>
+                <ul class="cr-cards">
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--indigo">PROJ-421</span>
+                      <span class="cr-badge cr-badge--high">high</span>
+                    </div>
+                    <p class="cr-card-title">OAuth2 SSO Integration</p>
+                    <p class="cr-card-desc">Add enterprise SSO support via OAuth2/OIDC for corporate customers</p>
+                    <div class="cr-tags"><span class="cr-tag">auth</span><span class="cr-tag">enterprise</span></div>
+                    <div class="cr-card-meta">
+                      <span>👤 Sarah Chen</span>
+                      <span>🕐 2h ago</span>
+                    </div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--indigo">PROJ-418</span>
+                      <span class="cr-badge cr-badge--med">medium</span>
+                    </div>
+                    <p class="cr-card-title">Billing Dashboard Redesign</p>
+                    <p class="cr-card-desc">Modernise the billing UI with usage charts and invoice history</p>
+                    <div class="cr-tags"><span class="cr-tag">ui</span><span class="cr-tag">billing</span></div>
+                    <div class="cr-card-meta">
+                      <span>👤 Marcus Webb</span>
+                      <span>🕐 5h ago</span>
+                    </div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--indigo">PROJ-415</span>
+                      <span class="cr-badge cr-badge--low">low</span>
+                    </div>
+                    <p class="cr-card-title">CSV Export for Reports</p>
+                    <p class="cr-card-desc">Allow engineers to export audit logs and metrics as CSV</p>
+                    <div class="cr-tags"><span class="cr-tag">export</span><span class="cr-tag">analytics</span></div>
+                    <div class="cr-card-meta">
+                      <span>👤 Priya Nair</span>
+                      <span>🕐 1d ago</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <span class="cr-connector" aria-hidden="true">→</span>
+
+              <!-- IMPLEMENT -->
+              <div class="cr-col cr-col--violet">
+                <div class="cr-col-head">
+                  <div class="cr-col-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    Implement
+                  </div>
+                  <span class="cr-col-count">4</span>
+                </div>
+                <ul class="cr-cards">
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--violet">PROJ-409</span>
+                      <span class="cr-agent-badge"><span class="cr-dot cr-dot--violet" aria-hidden="true"></span>CodeGen-7</span>
+                    </div>
+                    <p class="cr-card-title">User Notification System</p>
+                    <div class="cr-progress-row">
+                      <span>Progress</span>
+                      <strong class="cr-progress-pct cr-pct--green">68%</strong>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--violet" style="width:68%"></div>
+                    </div>
+                    <p class="cr-current-task">↳ Implementing webhook delivery queue</p>
+                    <div class="cr-card-meta"><span>⏱ 2h 14m</span><span>+847 lines</span><span>12 files</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--violet">PROJ-405</span>
+                      <span class="cr-agent-badge"><span class="cr-dot cr-dot--violet" aria-hidden="true"></span>CodeGen-3</span>
+                    </div>
+                    <p class="cr-card-title">API Rate Limiting</p>
+                    <div class="cr-progress-row">
+                      <span>Progress</span>
+                      <strong class="cr-progress-pct cr-pct--violet">42%</strong>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--violet" style="width:42%"></div>
+                    </div>
+                    <p class="cr-current-task">↳ Adding sliding window counters</p>
+                    <div class="cr-card-meta"><span>⏱ 1h 05m</span><span>+312 lines</span><span>6 files</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--violet">PROJ-402</span>
+                      <span class="cr-agent-badge"><span class="cr-dot cr-dot--violet" aria-hidden="true"></span>CodeGen-9</span>
+                    </div>
+                    <p class="cr-card-title">Dashboard Dark Mode</p>
+                    <div class="cr-progress-row">
+                      <span>Progress</span>
+                      <strong class="cr-progress-pct cr-pct--green">91%</strong>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--green" style="width:91%"></div>
+                    </div>
+                    <p class="cr-current-task">↳ Final theme token audit</p>
+                    <div class="cr-card-meta"><span>⏱ 3h 47m</span><span>+1204 lines</span><span>31 files</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--violet">PROJ-399</span>
+                      <span class="cr-agent-badge"><span class="cr-dot cr-dot--violet" aria-hidden="true"></span>CodeGen-1</span>
+                    </div>
+                    <p class="cr-card-title">Search Index Optimisation</p>
+                    <div class="cr-progress-row">
+                      <span>Progress</span>
+                      <strong class="cr-progress-pct cr-pct--blue">15%</strong>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--blue" style="width:15%"></div>
+                    </div>
+                    <p class="cr-current-task">↳ Analysing query execution plans</p>
+                    <div class="cr-card-meta"><span>⏱ 22m</span><span>+89 lines</span><span>3 files</span></div>
+                  </li>
+                </ul>
+              </div>
+
+              <span class="cr-connector" aria-hidden="true">→</span>
+
+              <!-- TESTS -->
+              <div class="cr-col cr-col--amber">
+                <div class="cr-col-head">
+                  <div class="cr-col-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+                    Tests
+                  </div>
+                  <span class="cr-col-count">2</span>
+                </div>
+                <ul class="cr-cards">
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--amber">PROJ-397</span>
+                      <span class="cr-agent-badge cr-spin">⟳ TestGen-2</span>
+                    </div>
+                    <p class="cr-card-title">Multi-Tenant Data Isolation</p>
+                    <div class="cr-test-grid">
+                      <div class="cr-test-cell">
+                        <strong>847</strong><span>total</span>
+                      </div>
+                      <div class="cr-test-cell cr-test-cell--pass">
+                        <strong>843</strong><span>passing</span>
+                      </div>
+                      <div class="cr-test-cell cr-test-cell--fail">
+                        <strong>4</strong><span>failing</span>
+                      </div>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="99.5" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--amber" style="width:99.5%"></div>
+                    </div>
+                    <div class="cr-card-meta"><span>Coverage 94.1%</span><span>⏱ 14m</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--amber">PROJ-394</span>
+                      <span class="cr-agent-badge cr-pass-badge">✓ TestGen-5</span>
+                    </div>
+                    <p class="cr-card-title">Payment Webhook Handler</p>
+                    <div class="cr-test-grid">
+                      <div class="cr-test-cell">
+                        <strong>234</strong><span>total</span>
+                      </div>
+                      <div class="cr-test-cell cr-test-cell--pass">
+                        <strong>234</strong><span>passing</span>
+                      </div>
+                      <div class="cr-test-cell">
+                        <strong>0</strong><span>failing</span>
+                      </div>
+                    </div>
+                    <div class="cr-progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                      <div class="cr-progress-fill cr-fill--green" style="width:100%"></div>
+                    </div>
+                    <div class="cr-card-meta"><span>Coverage 98.7%</span><span>⏱ 8m</span></div>
+                  </li>
+                </ul>
+              </div>
+
+              <span class="cr-connector" aria-hidden="true">→</span>
+
+              <!-- REVIEW -->
+              <div class="cr-col cr-col--blue">
+                <div class="cr-col-head">
+                  <div class="cr-col-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M11 18H8a2 2 0 0 1-2-2V9"/></svg>
+                    Review
+                  </div>
+                  <span class="cr-col-count">3</span>
+                </div>
+                <ul class="cr-cards">
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--blue">PROJ-391</span>
+                      <a class="cr-pr-link" href="#" aria-label="Pull Request 1247"># PR-1247</a>
+                    </div>
+                    <p class="cr-card-title">GraphQL API v2</p>
+                    <div class="cr-reviewers">
+                      <span class="cr-reviewer cr-reviewer--approved" title="Alex Kim: approved">AK</span>
+                      <span class="cr-reviewer cr-reviewer--approved" title="Jamie Torres: approved">JT</span>
+                      <span class="cr-reviewer cr-reviewer--pending" title="Sam Okafor: pending">SO</span>
+                      <span class="cr-reviewer-count">2 / 3 approved</span>
+                    </div>
+                    <div class="cr-card-meta"><span>+2108 lines</span><span>47 files</span><span>🕐 3h ago</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--blue">PROJ-387</span>
+                      <a class="cr-pr-link" href="#" aria-label="Pull Request 1243"># PR-1243</a>
+                    </div>
+                    <p class="cr-card-title">Redis Cache Layer</p>
+                    <div class="cr-reviewers">
+                      <span class="cr-reviewer cr-reviewer--pending" title="Rachel Wong: pending">RW</span>
+                      <span class="cr-reviewer cr-reviewer--pending" title="Security Bot: pending">SB</span>
+                      <span class="cr-reviewer-count">0 / 2 approved</span>
+                    </div>
+                    <div class="cr-card-meta"><span>+567 lines</span><span>14 files</span><span>🕐 6h ago</span></div>
+                  </li>
+                  <li class="cr-card cr-card--warn">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--blue">PROJ-384</span>
+                      <a class="cr-pr-link" href="#" aria-label="Pull Request 1241"># PR-1241</a>
+                    </div>
+                    <p class="cr-card-title">Auth Middleware Refactor</p>
+                    <div class="cr-reviewers">
+                      <span class="cr-reviewer cr-reviewer--changes" title="Alex Kim: changes requested">AK</span>
+                      <span class="cr-reviewer cr-reviewer--approved" title="Dana Reyes: approved">DR</span>
+                      <span class="cr-reviewer-count">1 / 2 approved</span>
+                    </div>
+                    <p class="cr-changes-note">⚠ Changes requested</p>
+                    <div class="cr-card-meta"><span>+389 lines</span><span>9 files</span><span>🕐 9h ago</span></div>
+                  </li>
+                </ul>
+              </div>
+
+              <span class="cr-connector" aria-hidden="true">→</span>
+
+              <!-- RELEASED -->
+              <div class="cr-col cr-col--green">
+                <div class="cr-col-head">
+                  <div class="cr-col-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    Released
+                  </div>
+                  <span class="cr-col-count">4</span>
+                </div>
+                <ul class="cr-cards">
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--green">PROJ-381</span>
+                      <span class="cr-version">✓ v2.4.1</span>
+                    </div>
+                    <p class="cr-card-title">Stripe Integration v2</p>
+                    <div class="cr-card-meta"><span>🚀 production</span><span>🕐 47m ago</span></div>
+                    <div class="cr-card-meta"><span>Tests 312/312</span><span>Deploy 3m 12s</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--green">PROJ-378</span>
+                      <span class="cr-version">✓ v2.4.0</span>
+                    </div>
+                    <p class="cr-card-title">Performance Monitoring</p>
+                    <div class="cr-card-meta"><span>🚀 production</span><span>🕐 2h ago</span></div>
+                    <div class="cr-card-meta"><span>Tests 198/198</span><span>Deploy 2m 47s</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--green">PROJ-372</span>
+                      <span class="cr-version">✓ v2.3.9</span>
+                    </div>
+                    <p class="cr-card-title">User Onboarding Flow</p>
+                    <div class="cr-card-meta"><span>🚀 production</span><span>🕐 5h ago</span></div>
+                    <div class="cr-card-meta"><span>Tests 445/445</span><span>Deploy 4m 01s</span></div>
+                  </li>
+                  <li class="cr-card">
+                    <div class="cr-card-top">
+                      <span class="cr-ticket cr-ticket--green">PROJ-368</span>
+                      <span class="cr-version">✓ v2.3.8</span>
+                    </div>
+                    <p class="cr-card-title">Email Template Engine</p>
+                    <div class="cr-card-meta"><span>🚀 production</span><span>🕐 Yesterday</span></div>
+                    <div class="cr-card-meta"><span>Tests 88/88</span><span>Deploy 1m 55s</span></div>
+                  </li>
+                </ul>
+              </div>
+
+            </div><!-- /cr-pipeline -->
+          </div><!-- /cr-pipeline-scroll -->
+        </section>
+
+        <!-- ── Right Sidebar ── -->
+        <aside class="cr-sidebar">
+
+          <!-- Active Agents -->
+          <section class="cr-panel" aria-label="Active agents">
+            <div class="cr-panel-head">
+              <h2>Active Agents</h2>
+              <span class="cr-badge-small cr-badge-small--violet">5 running</span>
+            </div>
+            <ul class="cr-agents">
+              <li class="cr-agent">
+                <div class="cr-agent-top">
+                  <div class="cr-agent-name">
+                    <span class="cr-dot cr-dot--violet" aria-hidden="true"></span>
+                    <span class="cr-mono">CodeGen-7</span>
+                    <span class="cr-status-text">coding</span>
+                  </div>
+                  <span class="cr-model-tag">sonnet-4-5</span>
+                </div>
+                <p class="cr-agent-task">User Notification System</p>
+                <p class="cr-agent-action">↳ Writing unit tests for queue processor</p>
+                <div class="cr-agent-prog-row">
+                  <span>68% complete</span>
+                  <span>2h 14m</span>
+                </div>
+                <div class="cr-progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100">
+                  <div class="cr-progress-fill cr-fill--violet" style="width:68%"></div>
+                </div>
+                <div class="cr-agent-meta">
+                  <span>⚡ 148k tokens</span>
+                  <span>⎇ 7 commits</span>
+                </div>
+              </li>
+              <li class="cr-agent">
+                <div class="cr-agent-top">
+                  <div class="cr-agent-name">
+                    <span class="cr-dot cr-dot--violet" aria-hidden="true"></span>
+                    <span class="cr-mono">CodeGen-9</span>
+                    <span class="cr-status-text">coding</span>
+                  </div>
+                  <span class="cr-model-tag">sonnet-4-5</span>
+                </div>
+                <p class="cr-agent-task">Dashboard Dark Mode</p>
+                <p class="cr-agent-action">↳ Auditing CSS custom properties</p>
+                <div class="cr-agent-prog-row">
+                  <span>91% complete</span>
+                  <span>3h 47m</span>
+                </div>
+                <div class="cr-progress-bar" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">
+                  <div class="cr-progress-fill cr-fill--green" style="width:91%"></div>
+                </div>
+                <div class="cr-agent-meta">
+                  <span>⚡ 312k tokens</span>
+                  <span>⎇ 18 commits</span>
+                </div>
+              </li>
+              <li class="cr-agent">
+                <div class="cr-agent-top">
+                  <div class="cr-agent-name">
+                    <span class="cr-dot cr-dot--violet" aria-hidden="true"></span>
+                    <span class="cr-mono">CodeGen-3</span>
+                    <span class="cr-status-text">coding</span>
+                  </div>
+                  <span class="cr-model-tag cr-model-tag--haiku">haiku-4-5</span>
+                </div>
+                <p class="cr-agent-task">API Rate Limiting</p>
+                <p class="cr-agent-action">↳ Implementing Redis sliding window</p>
+                <div class="cr-agent-prog-row">
+                  <span>42% complete</span>
+                  <span>1h 05m</span>
+                </div>
+                <div class="cr-progress-bar" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100">
+                  <div class="cr-progress-fill cr-fill--blue" style="width:42%"></div>
+                </div>
+                <div class="cr-agent-meta">
+                  <span>⚡ 67k tokens</span>
+                  <span>⎇ 4 commits</span>
+                </div>
+              </li>
+              <li class="cr-agent">
+                <div class="cr-agent-top">
+                  <div class="cr-agent-name">
+                    <span class="cr-dot cr-dot--violet" aria-hidden="true"></span>
+                    <span class="cr-mono">CodeGen-1</span>
+                    <span class="cr-status-text">coding</span>
+                  </div>
+                  <span class="cr-model-tag cr-model-tag--haiku">haiku-4-5</span>
+                </div>
+                <p class="cr-agent-task">Search Index Optimisation</p>
+                <p class="cr-agent-action">↳ Parsing EXPLAIN ANALYSE output</p>
+                <div class="cr-agent-prog-row">
+                  <span>15% complete</span>
+                  <span>22m</span>
+                </div>
+                <div class="cr-progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                  <div class="cr-progress-fill cr-fill--blue" style="width:15%"></div>
+                </div>
+                <div class="cr-agent-meta">
+                  <span>⚡ 19k tokens</span>
+                  <span>⎇ 1 commit</span>
+                </div>
+              </li>
+              <li class="cr-agent">
+                <div class="cr-agent-top">
+                  <div class="cr-agent-name">
+                    <span class="cr-dot cr-dot--amber" aria-hidden="true"></span>
+                    <span class="cr-mono">TestGen-2</span>
+                    <span class="cr-status-text cr-status-text--amber">testing</span>
+                  </div>
+                  <span class="cr-model-tag cr-model-tag--haiku">haiku-4-5</span>
+                </div>
+                <p class="cr-agent-task">Multi-Tenant Test Suite</p>
+                <p class="cr-agent-action">↳ Running integration tests (843/847)</p>
+                <div class="cr-agent-prog-row">
+                  <span>99% complete</span>
+                  <span>14m</span>
+                </div>
+                <div class="cr-progress-bar" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100">
+                  <div class="cr-progress-fill cr-fill--green" style="width:99%"></div>
+                </div>
+                <div class="cr-agent-meta">
+                  <span>⚡ 28k tokens</span>
+                  <span>⎇ 0 commits</span>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Activity Feed -->
+          <section class="cr-panel" aria-label="Activity feed">
+            <div class="cr-panel-head">
+              <h2>Activity Feed</h2>
+              <span class="cr-live-badge"><span class="cr-pulse" aria-hidden="true"></span>Live</span>
+            </div>
+            <ul class="cr-feed">
+              <li class="cr-feed-item cr-feed-item--commit">
+                <div class="cr-feed-icon" aria-hidden="true">⎇</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">CodeGen-9</span>
+                  <p>feat: dark-mode toggle with system preference detection</p>
+                  <code class="cr-branch">feat/dark-mode</code>
+                </div>
+                <time class="cr-feed-time">2m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--approved">
+                <div class="cr-feed-icon" aria-hidden="true">✓</div>
+                <div class="cr-feed-body">
+                  <span>Jamie Torres</span>
+                  <p>Approved PR #1247 (GraphQL API v2)</p>
+                </div>
+                <time class="cr-feed-time">5m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--test">
+                <div class="cr-feed-icon" aria-hidden="true">◈</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">TestGen-2</span>
+                  <p>843 / 847 tests passing for multi-tenant isolation</p>
+                </div>
+                <time class="cr-feed-time">12m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--agent">
+                <div class="cr-feed-icon" aria-hidden="true">◉</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">CodeGen-1</span>
+                  <p>Started work on Search Index Optimisation</p>
+                </div>
+                <time class="cr-feed-time">22m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--deploy">
+                <div class="cr-feed-icon" aria-hidden="true">🚀</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">CodeGen-5</span>
+                  <p>Deployed Stripe Integration v2 → production (v2.4.1)</p>
+                </div>
+                <time class="cr-feed-time">47m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--warn">
+                <div class="cr-feed-icon" aria-hidden="true">⚠</div>
+                <div class="cr-feed-body">
+                  <span>Alex Kim</span>
+                  <p>Requested changes on PR #1241 (Auth Middleware Refactor)</p>
+                </div>
+                <time class="cr-feed-time">52m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--commit">
+                <div class="cr-feed-icon" aria-hidden="true">⎇</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">CodeGen-3</span>
+                  <p>feat: sliding window counter with TTL-based expiry</p>
+                  <code class="cr-branch">feat/rate-limiting</code>
+                </div>
+                <time class="cr-feed-time">1h ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--approved">
+                <div class="cr-feed-icon" aria-hidden="true">✓</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">TestGen-5</span>
+                  <p>All 234 tests passing for Payment Webhook Handler</p>
+                </div>
+                <time class="cr-feed-time">1h 8m ago</time>
+              </li>
+              <li class="cr-feed-item cr-feed-item--deploy">
+                <div class="cr-feed-icon" aria-hidden="true">🚀</div>
+                <div class="cr-feed-body">
+                  <span class="cr-mono">CodeGen-8</span>
+                  <p>Deployed Performance Monitoring → production (v2.4.0)</p>
+                </div>
+                <time class="cr-feed-time">2h ago</time>
+              </li>
+            </ul>
+          </section>
+
+        </aside><!-- /cr-sidebar -->
+      </div><!-- /cr-layout -->
+    </main>
+
+    <script src="control-room.js"></script>
+  </body>
+</html>
