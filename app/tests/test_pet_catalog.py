@@ -25,3 +25,25 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_defaults_to_available_only() -> None:
+    """Default search should return only available pets, not pending ones."""
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-100" in pet_ids  # Mochi (available)
+    assert "pet-101" in pet_ids  # Scout (available)
+    assert "pet-102" in pet_ids  # Pip (available)
+    assert "pet-103" not in pet_ids  # Nova (pending) should NOT appear
+
+
+def test_search_pets_with_empty_status_returns_only_available() -> None:
+    """Passing empty status string should default to available pets only."""
+    results = search_pets(status="")
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-100" in pet_ids  # Mochi (available)
+    assert "pet-101" in pet_ids  # Scout (available)
+    assert "pet-102" in pet_ids  # Pip (available)
+    assert "pet-103" not in pet_ids  # Nova (pending) should NOT appear
