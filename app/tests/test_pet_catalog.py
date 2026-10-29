@@ -25,3 +25,12 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_with_empty_status_returns_only_available() -> None:
+    results = search_pets(species="dog", status="")
+
+    assert len(results) == 1
+    assert results[0].name == "Scout"
+    assert results[0].status == "available"
+    assert "Nova" not in [pet.name for pet in results]
