@@ -25,3 +25,14 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_default_search_excludes_pending_pets() -> None:
+    """Regression test for KAN-211: default search must not return pending pets like Nova."""
+    results = search_pets()
+    pet_ids = [pet.id for pet in results]
+
+    assert "pet-103" not in pet_ids, "Nova (pending) must not appear in default search"
+    assert "pet-100" in pet_ids, "Mochi (available) should appear in default search"
+    assert "pet-101" in pet_ids, "Scout (available) should appear in default search"
+    assert "pet-102" in pet_ids, "Pip (available) should appear in default search"
