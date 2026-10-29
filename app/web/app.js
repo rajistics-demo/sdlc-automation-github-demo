@@ -11,10 +11,13 @@ function renderResults() {
   const list = document.querySelector("#results");
   list.innerHTML = "";
 
+  // Product rule: Default catalog shows only available pets.
+  // Pending pets (like Nova/pet-103) are filtered out to prevent
+  // customer confusion and invalid adoption attempts.
   const matches = pets.filter((pet) => {
     return pet.name.toLowerCase().includes(query)
       && (species === "" || pet.species === species)
-      && pet.status === "available";
+      && pet.status === "available";  // Availability filter
   });
 
   if (matches.length === 0) {
