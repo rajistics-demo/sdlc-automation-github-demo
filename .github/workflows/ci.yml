@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Python tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - name: Record candidate
+        env:
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          WORKFLOW_REF: ${{ github.workflow_ref }}
+          WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: |
+          {
+            echo "PR head: $PR_HEAD"
+            echo "PR base: $PR_BASE"
+            echo "Tested merge commit: $(git rev-parse HEAD)"
+            echo "Workflow: $WORKFLOW_REF ($WORKFLOW_SHA)"
+            echo "Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT"
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Install test dependency
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Run tests
+        run: python -m pytest -q --junitxml=pytest-results.xml
+      - name: Save test report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pytest-${{ github.event.pull_request.head.sha }}-${{ github.run_attempt }}
+          path: pytest-results.xml
+          if-no-files-found: ignore
+          retention-days: 7
