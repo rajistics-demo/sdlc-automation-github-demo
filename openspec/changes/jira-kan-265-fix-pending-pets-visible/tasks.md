@@ -16,7 +16,9 @@
 - [x] Add regression tests to `app/tests/test_pet_catalog.py`
 - [x] Run catalog tests to verify fix
 - [x] Run full test suite (94 passed, 1 pre-existing failure unrelated to changes)
-- [ ] Open draft PR with evidence and validation results
+- [x] Open draft PR with evidence and validation results (PR #240)
+- [x] Add openhands-review label to trigger code review automation
+- [x] Post summary comment to Jira issue KAN-265
 
 ## Validation Status
 
