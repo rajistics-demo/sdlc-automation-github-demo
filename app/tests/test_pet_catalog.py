@@ -15,6 +15,21 @@ def test_search_pets_can_find_pending_pets_when_requested() -> None:
     assert [pet.name for pet in results] == ["Nova"]
 
 
+def test_search_pets_defaults_empty_status_to_available() -> None:
+    results = search_pets(status="")
+
+    assert all(pet.status == "available" for pet in results)
+    assert "Nova" not in [pet.name for pet in results]
+
+
+def test_search_pets_excludes_pending_from_default_search() -> None:
+    results = search_pets()
+
+    assert all(pet.status == "available" for pet in results)
+    assert [pet.id for pet in results] == ["pet-100", "pet-101", "pet-102"]
+    assert "pet-103" not in [pet.id for pet in results]
+
+
 def test_search_pets_filters_by_tag() -> None:
     results = search_pets(tag="indoor")
 
