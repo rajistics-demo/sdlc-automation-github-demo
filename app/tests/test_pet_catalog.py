@@ -25,3 +25,12 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_treats_empty_status_as_available() -> None:
+    """Regression test: empty status string should not bypass status filter."""
+    results = search_pets(status="")
+
+    assert len(results) == 3
+    assert [pet.id for pet in results] == ["pet-100", "pet-101", "pet-102"]
+    assert "pet-103" not in [pet.id for pet in results]
