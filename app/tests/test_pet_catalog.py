@@ -3,6 +3,22 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_default_search_excludes_pending_pets() -> None:
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids, "Nova (pet-103) with status='pending' should not appear in default search"
+    assert "pet-100" in pet_ids
+    assert "pet-101" in pet_ids
+    assert "pet-102" in pet_ids
+
+
+def test_empty_status_does_not_bypass_filter() -> None:
+    results = search_pets(status="")
+
+    assert len(results) == 0, "Empty status should not bypass filter and return all pets"
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 
