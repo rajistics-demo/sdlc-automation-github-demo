@@ -1,0 +1,4 @@
+{
+  "prompt": "Read the event payload and report the issue title and label. Do not modify files or contact external services.",
+  "timeout": 90
+}

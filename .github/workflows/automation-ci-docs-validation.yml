@@ -1,0 +1,19 @@
+name: Automation deployment documentation checks
+on:
+  push:
+    branches: [codex/automation-ci-docs-20261106]
+permissions:
+  contents: read
+jobs:
+  examples:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      - name: Check examples without deploying or accessing credentials
+        run: python3 docs/examples/automation-ci-validation/test_examples.py

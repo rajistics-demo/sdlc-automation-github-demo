@@ -1,0 +1,16 @@
+{
+  "name": "docs-ci-example-prompt",
+  "prompt": "Read the event payload and report the issue title. Do not modify files or contact external services.",
+  "model": "your-model-profile",
+  "trigger": {
+    "type": "event",
+    "source": "github",
+    "on": ["issues.labeled"],
+    "filter": "repository.full_name == 'example-org/example-repo' && label.name == 'docs-ci-validation-only'"
+  },
+  "repos": [{"url": "https://github.com/example-org/example-repo", "ref": "REPLACE_WITH_APPROVED_COMMIT", "provider": "github"}],
+  "timeout": 60,
+  "keep_alive": false,
+  "state": "INACTIVE",
+  "enabled": false
+}
