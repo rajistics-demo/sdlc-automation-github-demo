@@ -25,3 +25,23 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_search_pets_empty_status_defaults_to_available() -> None:
+    results = search_pets(status="")
+
+    result_ids = [pet.id for pet in results]
+    assert "pet-100" in result_ids
+    assert "pet-101" in result_ids
+    assert "pet-102" in result_ids
+    assert "pet-103" not in result_ids
+
+
+def test_search_pets_whitespace_status_defaults_to_available() -> None:
+    results = search_pets(status="   ")
+
+    result_ids = [pet.id for pet in results]
+    assert "pet-100" in result_ids
+    assert "pet-101" in result_ids
+    assert "pet-102" in result_ids
+    assert "pet-103" not in result_ids
