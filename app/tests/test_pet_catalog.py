@@ -3,6 +3,15 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_search_pets_defaults_to_available_only() -> None:
+    """Default search without status parameter should only return available pets."""
+    results = search_pets()
+
+    assert len(results) == 3
+    assert all(pet.status == "available" for pet in results)
+    assert [pet.name for pet in results] == ["Mochi", "Scout", "Pip"]
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 

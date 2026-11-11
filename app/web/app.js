@@ -8,19 +8,25 @@ const pets = [
 function renderResults() {
   const query = document.querySelector("#query").value.trim().toLowerCase();
   const species = document.querySelector("#species").value;
+  const status = document.querySelector("#status").value;
   const list = document.querySelector("#results");
+  const heading = document.querySelector("section h2");
   list.innerHTML = "";
+
+  const statusLabel = status === "available" ? "Available" : "Pending";
+  heading.textContent = `${statusLabel} Pets`;
 
   const matches = pets.filter((pet) => {
     return pet.name.toLowerCase().includes(query)
       && (species === "" || pet.species === species)
-      && pet.status === "available";
+      && pet.status === status;
   });
 
   if (matches.length === 0) {
     const empty = document.createElement("li");
     empty.className = "empty";
-    empty.textContent = "No available pets match this search.";
+    const statusLabel = status === "available" ? "available" : status;
+    empty.textContent = `No ${statusLabel} pets match this search.`;
     list.appendChild(empty);
     return;
   }
