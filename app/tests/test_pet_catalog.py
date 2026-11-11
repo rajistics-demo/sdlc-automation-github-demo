@@ -25,3 +25,22 @@ def test_search_pets_filters_by_tag() -> None:
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
         search_pets(max_results=max_results)
+
+
+def test_default_search_excludes_pending_pets() -> None:
+    """Regression test: default search must not return pending pets."""
+    results = search_pets()
+    
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids, "Nova (pet-103) is pending and should not appear in default search"
+    
+    statuses = {pet.status for pet in results}
+    assert statuses == {"available"}, f"Default search should only return available pets, got: {statuses}"
+
+
+def test_available_only_search_excludes_pending_pets() -> None:
+    """Regression test: explicit available-only search must not return pending pets."""
+    results = search_pets(status="available")
+    
+    for pet in results:
+        assert pet.status == "available", f"Pet {pet.name} has status {pet.status}, expected available"
