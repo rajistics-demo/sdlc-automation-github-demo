@@ -32,7 +32,11 @@ def search_pets(
     tag: str | None = None,
     max_results: int = 10,
 ) -> list[Pet]:
-    """Search pets by name, species, status, and tag."""
+    """Search pets by name, species, status, and tag.
+    
+    Default behavior returns only available pets. Pending pets appear only
+    when explicitly requested via status parameter to prevent customer confusion.
+    """
     if max_results < 1 or max_results > 50:
         raise ValueError("max_results must be between 1 and 50")
 

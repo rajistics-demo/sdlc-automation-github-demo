@@ -11,6 +11,8 @@ function renderResults() {
   const list = document.querySelector("#results");
   list.innerHTML = "";
 
+  // Default catalog view: show only available pets, never pending pets.
+  // Pending pets (e.g., Nova/pet-103) should not appear in customer-facing search.
   const matches = pets.filter((pet) => {
     return pet.name.toLowerCase().includes(query)
       && (species === "" || pet.species === species)
