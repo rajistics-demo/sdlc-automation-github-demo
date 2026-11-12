@@ -3,6 +3,21 @@ import pytest
 from petstore_app.catalog import search_pets
 
 
+def test_search_pets_default_returns_only_available() -> None:
+    """Default search should return only available pets, not pending ones."""
+    results = search_pets()
+
+    assert all(pet.status == "available" for pet in results)
+    assert len(results) == 3  # Mochi, Scout, Pip
+
+
+def test_search_pets_empty_status_returns_no_results() -> None:
+    """Empty status string should not bypass filtering (regression test for ACME-8)."""
+    results = search_pets(status="")
+
+    assert len(results) == 0  # No pets have empty status
+
+
 def test_search_pets_filters_by_species_and_status() -> None:
     results = search_pets(species="dog")
 
