@@ -11,6 +11,8 @@ function renderResults() {
   const list = document.querySelector("#results");
   list.innerHTML = "";
 
+  // Filter pets by search criteria. IMPORTANT: Only show "available" pets by default.
+  // Pending pets should not appear in customer-facing search results unless explicitly requested.
   const matches = pets.filter((pet) => {
     return pet.name.toLowerCase().includes(query)
       && (species === "" || pet.species === species)
