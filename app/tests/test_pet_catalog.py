@@ -21,6 +21,15 @@ def test_search_pets_filters_by_tag() -> None:
     assert [pet.name for pet in results] == ["Mochi", "Pip"]
 
 
+def test_search_pets_returns_only_available_by_default() -> None:
+    """Default search should only return available pets, not pending ones."""
+    results = search_pets()
+
+    pet_ids = [pet.id for pet in results]
+    assert "pet-103" not in pet_ids  # Nova is pending, should not appear
+    assert all(pet.status == "available" for pet in results)
+
+
 @pytest.mark.parametrize("max_results", [0, 51])
 def test_search_pets_validates_max_results(max_results: int) -> None:
     with pytest.raises(ValueError, match="max_results"):
