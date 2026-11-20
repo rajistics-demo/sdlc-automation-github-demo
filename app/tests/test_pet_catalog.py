@@ -15,6 +15,17 @@ def test_search_pets_can_find_pending_pets_when_requested() -> None:
     assert [pet.name for pet in results] == ["Nova"]
 
 
+def test_search_pets_empty_status_defaults_to_available() -> None:
+    """Regression test for ACME-15: empty status should exclude pending pets."""
+    results = search_pets(status="")
+
+    pet_names = [pet.name for pet in results]
+    assert "Nova" not in pet_names
+    assert "Mochi" in pet_names
+    assert "Scout" in pet_names
+    assert "Pip" in pet_names
+
+
 def test_search_pets_filters_by_tag() -> None:
     results = search_pets(tag="indoor")
 
